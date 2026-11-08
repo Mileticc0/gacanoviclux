@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mapa – Gačanović Lux</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Italiana&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha384-sHL9NAb7lN7rfvG5lfHpm643Xkcjzp4jFvuavGOndn6pjVqS6ny56CAt3nsEVT4H" crossorigin="anonymous">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha384-cxOPjt7s7Iz04uaHJceBmS+qpjv2JkIHNVcuOrM+YHwZOmJGBXI00mdUXEq65HTH" crossorigin="anonymous"></script>
+<style>
+html,body{margin:0;height:100%;background:#0E1D16;font:400 15px/1.5 'Inter Tight',system-ui,sans-serif;color:#18201C}
+#map{position:absolute;inset:0;background:#DCE2DA}
+.leaflet-tile-pane{filter:grayscale(1) sepia(.18) contrast(.92) brightness(1.04)}
+.leaflet-container a{color:#2E5E45}
+.leaflet-control-zoom a{width:40px!important;height:40px!important;line-height:40px!important;color:#12241C!important;background:#F5F4EF!important;border-color:#DCE2DA!important}
+.leaflet-bar{border:0!important;border-radius:14px!important;overflow:hidden;box-shadow:0 8px 24px -10px rgba(0,0,0,.4)!important}
+.leaflet-control-attribution{background:rgba(245,244,239,.85)!important;font-size:11px}
+.pin-home{width:48px;height:62px;display:flex;align-items:flex-start;justify-content:center}
+.pin-home .disc{width:48px;height:48px;border-radius:50%;background:#12241C;border:2px solid #C9A45C;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 24px -8px rgba(0,0,0,.6)}
+.pin-dot{width:34px;height:34px;border-radius:50%;background:#C9A45C;color:#12241C;font-weight:600;font-size:14px;display:flex;align-items:center;justify-content:center;border:2px solid #F5F4EF;box-shadow:0 8px 18px -8px rgba(0,0,0,.55)}
+.leaflet-popup-content-wrapper{border-radius:18px;background:#F5F4EF;box-shadow:0 14px 34px -14px rgba(0,0,0,.5)}
+.leaflet-popup-tip{background:#F5F4EF}
+.leaflet-popup-content{margin:14px 18px}
+.pop-t{font-family:'Italiana',serif;font-size:24px;line-height:1.1;margin:0 0 4px}
+.pop-d{margin:0;color:#3E4842}
+.lbl{background:#12241C;color:#F5F4EF;border:1px solid rgba(201,164,92,.6);border-radius:999px;padding:4px 12px;font:500 13px 'Inter Tight',sans-serif;box-shadow:none}
+.lbl::before{display:none}
+</style>
+</head>
+<body>
+<div id="map" role="region" aria-label="Mapa: Apartman Gačanović Lux i okolina"></div>
+<script>
+// Koordinate su okvirne – PROVERITI pre objave (posebno tačnu lokaciju Svetogorske 16).
+const HOME = [43.7276, 19.6993];
+const PLACES = [
+  { ll: [43.7262, 19.6965], sr: ['Centar i jezero', 'Par minuta hoda'], en: ['Centre and lake', 'A few minutes’ walk'] },
+  { ll: [43.7239, 19.6935], sr: ['Gondola Gold', 'Polazna stanica'], en: ['Gold Gondola', 'Lower station'] },
+  { ll: [43.6667, 19.6575], sr: ['Tornik', '~9 km'], en: ['Tornik', '~9 km'] },
+  { ll: [43.7377, 19.8336], sr: ['Stopića pećina', '~19 km'], en: ['Stopića Cave', '~19 km'] },
+  { ll: [43.6853, 19.8869], sr: ['Sirogojno', '~25 km'], en: ['Sirogojno', '~25 km'] },
+  { ll: [43.7930, 19.5040], sr: ['Mokra Gora', '~40 km'], en: ['Mokra Gora', '~40 km'] },
+];
+let lang = 'sr'; try { lang = localStorage.getItem('gl_lang') || 'sr'; } catch (e) {}
+document.documentElement.lang = lang;
+const pine = '<svg width="20" height="28" viewBox="0 0 100 140" aria-hidden="true"><path d="M50 4L66 38H58L76 72H64L86 112H54V136H46V112H14L36 72H24L42 38H34Z" fill="none" stroke="#C9A45C" stroke-width="8" stroke-linejoin="round"/></svg>';
+
+const map = L.map('map', { scrollWheelZoom: false, zoomControl: true, attributionControl: true });
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '© OpenStreetMap contributors' }).addTo(map);
+
+const home = L.marker(HOME, { icon: L.divIcon({ className: '', html: `<div class="pin-home"><div class="disc">${pine}</div></div>`, iconSize: [48, 62], iconAnchor: [24, 48], popupAnchor: [0, -46] }), zIndexOffset: 1000, title: 'Gačanović Lux' }).addTo(map);
+home.bindTooltip('Gačanović Lux', { permanent: true, direction: 'right', offset: [26, -24], className: 'lbl' });
+home.bindPopup(`<p class="pop-t">Gačanović Lux</p><p class="pop-d">Svetogorska 16, Zlatibor</p>`);
+
+const pts = [HOME];
+PLACES.forEach((p, i) => {
+  const [name, dist] = p[lang] || p.sr;
+  L.marker(p.ll, { icon: L.divIcon({ className: '', html: `<div class="pin-dot">${i + 1}</div>`, iconSize: [34, 34], iconAnchor: [17, 17], popupAnchor: [0, -16] }), title: name, keyboard: true })
+    .bindPopup(`<p class="pop-t">${name}</p><p class="pop-d">${dist}</p>`).addTo(map);
+  pts.push(p.ll);
+});
+const fit = () => map.fitBounds(L.latLngBounds(pts), { padding: [48, 48] });
+fit(); addEventListener('resize', fit);
+map.on('focus', () => map.scrollWheelZoom.enable());
+map.on('blur', () => map.scrollWheelZoom.disable());
+</script>
+</body>
+</html>

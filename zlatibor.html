@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Zlatibor – Apartman Gačanović Lux</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#12241C">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 140'%3E%3Crect width='100' height='140' rx='20' fill='%2312241C'/%3E%3Cpath d='M50 14L64 42H57L73 72H62L82 108H54V128H46V108H18L38 72H27L43 42H36Z' fill='none' stroke='%23C9A45C' stroke-width='5' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Italiana&amp;family=Inter+Tight:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="./site-shell.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+.lenis.lenis-stopped{overflow:hidden}
+body{margin:0;background:#12241C;color:#18201C;font:400 17px/1.65 'Inter Tight',system-ui,sans-serif;-webkit-tap-highlight-color:transparent;-webkit-font-smoothing:antialiased;overflow-x:clip}
+button,a{touch-action:manipulation;font:inherit;color:inherit}
+img{display:block}
+a{color:inherit;text-decoration:none}
+@media (hover:hover) and (pointer:fine){a:hover{color:#C9A45C}}
+:focus-visible{outline:2px solid #C9A45C;outline-offset:3px}
+</style>
+</helmet>
+
+
+<div ref="{{ curtainRef }}" aria-hidden="true" style="position:fixed;inset:0;z-index:240;background:#12241C;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none">
+  <svg width="64" height="90" viewBox="0 0 100 140"><path ref="{{ curtainPineRef }}" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" d="M50 4L66 38H58L76 72H64L86 112H54V136H46V112H14L36 72H24L42 38H34Z" fill="none" stroke="#C9A45C" stroke-width="2.5" stroke-linejoin="round"></path></svg>
+</div>
+
+<header ref="{{ navRef }}" style="position:fixed;top:clamp(10px,1.6vw,20px);left:0;right:0;z-index:90;display:flex;justify-content:center;padding:0 clamp(10px,2vw,24px);pointer-events:none">
+  <div style="pointer-events:auto;width:100%;max-width:1240px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:8px 8px 8px 18px;border-radius:999px;background:rgba(18,36,28,0.6);backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%);border:1px solid rgba(201,164,92,0.3);color:#F5F4EF">
+    <a href="index.html" data-page="" style="display:flex;align-items:center;gap:10px;font-weight:500;font-size:17px;white-space:nowrap">
+      <svg width="18" height="25" viewBox="0 0 100 140" aria-hidden="true"><path d="M50 4L66 38H58L76 72H64L86 112H54V136H46V112H14L36 72H24L42 38H34Z" fill="none" stroke="#C9A45C" stroke-width="6" stroke-linejoin="round"></path></svg>
+      Gačanović Lux
+    </a>
+    <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+      <nav aria-label="Navigacija" style="display:flex;align-items:center;gap:30px;font-size:15px">
+        <a href="apartman.html" data-page="" style="color:#F5F4EF">{{ t.navApt }}</a>
+        <a href="#top" data-anchor="" aria-current="page" style="color:#C9A45C">Zlatibor</a>
+        <a href="#kontakt" data-anchor="" style="color:#F5F4EF">{{ t.navContact }}</a>
+      </nav>
+    </sc-if>
+    <div style="display:flex;align-items:center;gap:6px">
+      <button type="button" onClick="{{ toggleLang }}" aria-label="{{ t.langLabel }}" style="height:44px;min-width:44px;padding:0 12px;border:0;border-radius:999px;background:transparent;color:#F5F4EF;font-weight:500;font-size:14px;cursor:pointer">{{ t.langOther }}</button>
+      <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+        <a href="rezervacija.html" data-page="" data-btn="" style="white-space:nowrap;position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:10px;height:44px;padding:0 20px;border-radius:999px;background:#C9A45C;color:#12241C;font-weight:600;font-size:15px;transition:transform 120ms cubic-bezier(0.23,1,0.32,1)" style-active="transform:scale(0.97)">
+          <span data-sheen="" aria-hidden="true" style="position:absolute;top:0;bottom:0;left:0;width:60%;background:linear-gradient(100deg,transparent,rgba(255,248,225,0.6),transparent);transform:translateX(-160%);pointer-events:none"></span>
+          <span style="position:relative">{{ t.ctaInq }}</span>
+          <span data-arrow="" aria-hidden="true" style="position:relative;display:inline-flex"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>
+        </a>
+      </sc-if>
+      <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+        <button type="button" onClick="{{ openMenu }}" aria-expanded="{{ menuAria }}" style="height:44px;padding:0 18px;border:0;border-radius:999px;background:#C9A45C;color:#12241C;font-weight:600;cursor:pointer" style-active="transform:scale(0.97)">{{ t.menu }}</button>
+      </sc-if>
+    </div>
+  </div>
+</header>
+
+<sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+  <div ref="{{ menuRef }}" role="dialog" aria-modal="true" aria-label="{{ t.menu }}" style="position:fixed;inset:0;z-index:120;background:#12241C;color:#F5F4EF;display:flex;flex-direction:column;padding:calc(20px + env(safe-area-inset-top)) 24px calc(32px + env(safe-area-inset-bottom));visibility:{{ menuVis }};clip-path:{{ menuClip }};transition:{{ menuTr }};overflow:hidden">
+    <svg aria-hidden="true" viewBox="0 0 100 140" style="position:absolute;right:-18%;bottom:-6%;width:90%;opacity:0.12"><path d="M50 4L66 38H58L76 72H64L86 112H54V136H46V112H14L36 72H24L42 38H34Z" fill="none" stroke="#C9A45C" stroke-width="0.8" stroke-linejoin="round"></path></svg>
+    <div style="position:relative;display:flex;justify-content:space-between;align-items:center;height:48px">
+      <span style="display:flex;align-items:center;gap:10px;font-weight:500"><svg width="18" height="25" viewBox="0 0 100 140" aria-hidden="true"><path d="M50 4L66 38H58L76 72H64L86 112H54V136H46V112H14L36 72H24L42 38H34Z" fill="none" stroke="#C9A45C" stroke-width="6" stroke-linejoin="round"></path></svg>Gačanović Lux</span>
+      <button type="button" onClick="{{ closeMenu }}" style="height:44px;padding:0 18px;border:1px solid rgba(201,164,92,0.4);border-radius:999px;background:transparent;color:#F5F4EF;cursor:pointer">{{ t.close }}</button>
+    </div>
+    <nav style="position:relative;margin-top:auto;display:flex;flex-direction:column;gap:2px">
+      <a data-mlink="" href="index.html" data-page="" onClick="{{ closeMenu }}" style="font-family:'Italiana',serif;font-size:clamp(48px,14vw,72px);line-height:1.08;opacity:{{ mlOp }};transform:{{ mlTf }};transition:{{ mlTr }};transition-delay:{{ mlD.d0 }}">{{ t.navHome }}</a>
+      <a data-mlink="" href="zlatibor.html" data-page="" onClick="{{ closeMenu }}" style="font-family:'Italiana',serif;font-size:clamp(48px,14vw,72px);line-height:1.08;opacity:{{ mlOp }};transform:{{ mlTf }};transition:{{ mlTr }};transition-delay:{{ mlD.d1 }}">Zlatibor</a>
+      <a data-mlink="" href="#kontakt" data-anchor="" onClick="{{ closeMenu }}" style="font-family:'Italiana',serif;font-size:clamp(48px,14vw,72px);line-height:1.08;opacity:{{ mlOp }};transform:{{ mlTf }};transition:{{ mlTr }};transition-delay:{{ mlD.d2 }}">{{ t.navContact }}</a>
+    </nav>
+    <a data-mlink="" href="rezervacija.html" data-page="" onClick="{{ closeMenu }}" style="position:relative;margin-top:40px;display:flex;align-items:center;justify-content:center;height:56px;border-radius:999px;background:#C9A45C;color:#12241C;font-weight:600;opacity:{{ mlOp }};transform:{{ mlTf }};transition:{{ mlTr }};transition-delay:{{ mlD.d3 }}">{{ t.ctaInq }}</a>
+  </div>
+</sc-if>
+
+
+<main id="top">
+  <section ref="{{ heroRef }}" style="position:relative;min-height:92svh;background:#12241C;color:#F5F4EF;overflow:hidden;display:flex;align-items:flex-end;padding:clamp(120px,14vw,160px) clamp(20px,4vw,40px) clamp(40px,5vw,72px)">
+    <img data-hero-img="" src="web/Gacanovic_42.jpg" width="2500" height="1667" alt="{{ t.heroAlt }}" fetchpriority="high" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+    <div aria-hidden="true" style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(18,36,28,0.78) 0%,rgba(18,36,28,0.3) 65%,rgba(18,36,28,0.1) 100%),linear-gradient(180deg,rgba(18,36,28,0.45) 0%,rgba(18,36,28,0.1) 35%,rgba(18,36,28,0.9) 100%)"></div>
+    <div style="position:relative;max-width:1240px;width:100%;margin:0 auto;display:flex;flex-direction:column;gap:24px">
+      <span data-hero-in="" style="align-self:flex-start;display:inline-flex;align-items:center;gap:8px;height:34px;padding:0 14px;border-radius:999px;background:rgba(18,36,28,0.4);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(201,164,92,0.45);font-size:14px;font-weight:500;white-space:nowrap">
+        <svg width="10" height="14" viewBox="0 0 100 140" aria-hidden="true"><path d="M50 4L66 38H58L76 72H64L86 112H54V136H46V112H14L36 72H24L42 38H34Z" fill="#C9A45C"></path></svg>{{ t.badge }}
+      </span>
+      <h1 data-hero-words="" style="margin:0;font-family:'Italiana',serif;font-weight:400;font-size:clamp(72px,14vw,220px);line-height:0.88">
+        <sc-for list="{{ heroWords }}" as="w" hint-placeholder-count="1"><span data-w="" style="display:inline-block">{{ w }}</span> </sc-for>
+      </h1>
+      <p data-hero-in="" style="margin:0;max-width:46ch;font-size:clamp(17px,1.4vw,20px);text-wrap:pretty">{{ t.heroSub }}</p>
+    </div>
+  </section>
+
+  <section style="background:#F5F4EF;padding:clamp(80px,10vw,140px) clamp(20px,4vw,40px)">
+    <div style="max-width:1240px;margin:0 auto">
+      <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:clamp(32px,4vw,56px)">
+        <div style="display:flex;flex-direction:column;gap:18px">
+          <svg width="22" height="31" viewBox="0 0 100 140" aria-hidden="true"><path d="M50 4L66 38H58L76 72H64L86 112H54V136H46V112H14L36 72H24L42 38H34Z" fill="none" stroke="#A9764B" stroke-width="5" stroke-linejoin="round"></path></svg>
+          <h2 data-words="" style="margin:0;font-family:'Italiana',serif;font-weight:400;font-size:clamp(46px,6vw,96px);line-height:0.95;color:#18201C">
+            <sc-for list="{{ attrWords }}" as="w"><span data-w="" style="display:inline-block">{{ w }}</span> </sc-for>
+          </h2>
+        </div>
+      </div>
+      <div data-stagger="" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:16px">
+        <sc-for list="{{ attrs }}" as="a" hint-placeholder-count="7">
+          <article style="display:flex;flex-direction:column;background:#DCE2DA;border-radius:28px;overflow:hidden">
+            <div style="position:relative;height:clamp(240px,22vw,300px);overflow:hidden;margin:8px 8px 0;border-radius:22px;background:#C5CCC4">
+              <div data-par="" style="position:absolute;left:0;right:0;top:-12%;height:124%">
+                <img src="{{ a.src }}" alt="{{ a.name }}" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover">
+              </div>
+              <span style="position:absolute;left:12px;top:12px;display:inline-flex;align-items:center;height:32px;padding:0 12px;border-radius:999px;background:rgba(18,36,28,0.8);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:#F5F4EF;font-size:14px;white-space:nowrap;pointer-events:none">{{ a.dist }}</span>
+            </div>
+            <div style="padding:22px 24px 26px;display:flex;flex-direction:column;gap:8px">
+              <h3 style="margin:0;font-family:'Italiana',serif;font-weight:400;font-size:34px;line-height:1.05;color:#18201C">{{ a.name }}</h3>
+              <p style="margin:0;color:#3E4842;text-wrap:pretty">{{ a.text }}</p>
+            </div>
+          </article>
+        </sc-for>
+      </div>
+      <p style="margin:24px 0 0;font-size:14px;color:#5C6660">{{ t.distNote }}</p>
+    </div>
+  </section>
+
+  <section id="mapa" style="background:#12241C;color:#F5F4EF;padding:clamp(80px,10vw,140px) clamp(20px,4vw,40px)">
+    <div style="max-width:1240px;margin:0 auto;display:flex;flex-wrap:wrap;gap:clamp(32px,5vw,72px);align-items:stretch">
+      <div style="flex:1 1 300px;display:flex;flex-direction:column;gap:20px">
+        <svg width="22" height="31" viewBox="0 0 100 140" aria-hidden="true"><path d="M50 4L66 38H58L76 72H64L86 112H54V136H46V112H14L36 72H24L42 38H34Z" fill="none" stroke="#C9A45C" stroke-width="5" stroke-linejoin="round"></path></svg>
+        <h2 data-words="" style="margin:0;font-family:'Italiana',serif;font-weight:400;font-size:clamp(46px,6vw,96px);line-height:0.95">
+          <sc-for list="{{ mapWords }}" as="w"><span data-w="" style="display:inline-block">{{ w }}</span> </sc-for>
+        </h2>
+        <p style="margin:0;color:#DCE2DA;max-width:38ch">{{ t.mapText }}</p>
+        <div style="display:flex;flex-direction:column;gap:2px;font-size:19px">
+          <span>Svetogorska 16</span>
+          <span style="color:#DCE2DA">31315 Zlatibor, Srbija</span>
+        </div>
+        <div>
+          <a href="{{ mapsUrl }}" target="_blank" rel="noopener" data-btn="" style="white-space:nowrap;position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:12px;height:52px;padding:0 22px;border-radius:999px;border:1px solid rgba(201,164,92,0.6);color:#F5F4EF;font-weight:500">
+            <span data-sheen="" aria-hidden="true" style="position:absolute;top:0;bottom:0;left:0;width:60%;background:linear-gradient(100deg,transparent,rgba(201,164,92,0.35),transparent);transform:translateX(-160%);pointer-events:none"></span>
+            <span style="position:relative">{{ t.mapLink }}</span>
+            <span data-arrow="" aria-hidden="true" style="position:relative;display:inline-flex"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>
+          </a>
+        </div>
+      </div>
+      <div style="flex:1.6 1 420px;min-height:clamp(360px,40vw,540px);border-radius:28px;overflow:hidden;border:1px solid rgba(201,164,92,0.35);background:#0E1D16;padding:8px">
+        <iframe title="{{ t.mapTitle }}" src="mapa.html" loading="lazy" style="width:100%;height:100%;min-height:clamp(344px,39vw,524px);border:0;border-radius:22px;display:block"></iframe>
+      </div>
+    </div>
+  </section>
+</main>
+
+
+<footer id="kontakt" ref="{{ footRef }}" style="background:#12241C;color:#F5F4EF;border-top:1px solid rgba(201,164,92,0.3);overflow:hidden;padding:clamp(72px,9vw,128px) clamp(20px,4vw,40px) 0">
+  <div style="max-width:1240px;margin:0 auto">
+    <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:32px;padding-bottom:clamp(48px,6vw,88px);border-bottom:1px solid rgba(201,164,92,0.3)">
+      <h2 data-words="" style="margin:0;font-family:'Italiana',serif;font-weight:400;font-size:clamp(52px,7.6vw,124px);line-height:0.95;max-width:11ch">
+        <sc-for list="{{ ftWords }}" as="w"><span data-w="" style="display:inline-block">{{ w }}</span> </sc-for>
+      </h2>
+      <a href="rezervacija.html" data-page="" data-btn="" style="white-space:nowrap;position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:12px;height:60px;padding:0 30px;border-radius:999px;background:#C9A45C;color:#12241C;font-weight:600;font-size:17px;transition:transform 120ms cubic-bezier(0.23,1,0.32,1)" style-active="transform:scale(0.97)">
+        <span data-sheen="" aria-hidden="true" style="position:absolute;top:0;bottom:0;left:0;width:60%;background:linear-gradient(100deg,transparent,rgba(255,248,225,0.6),transparent);transform:translateX(-160%);pointer-events:none"></span>
+        <span style="position:relative">{{ t.ctaInq }}</span>
+        <span data-arrow="" aria-hidden="true" style="position:relative;display:inline-flex"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>
+      </a>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:36px;padding:clamp(40px,5vw,64px) 0">
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <span style="display:flex;align-items:center;gap:10px;font-weight:500"><svg width="18" height="25" viewBox="0 0 100 140" aria-hidden="true"><path d="M50 4L66 38H58L76 72H64L86 112H54V136H46V112H14L36 72H24L42 38H34Z" fill="none" stroke="#C9A45C" stroke-width="6" stroke-linejoin="round"></path></svg>Gačanović Lux</span>
+        <p style="margin:0;color:#DCE2DA;max-width:28ch">{{ t.ftAbout }}</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <span style="color:#C9A45C;font-size:14px">{{ t.ftPages }}</span>
+        <a href="index.html" data-page="">{{ t.navHome }}</a>
+        <a href="zlatibor.html" data-page="">Zlatibor</a>
+        <a href="rezervacija.html" data-page="">{{ t.navInq }}</a>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <span style="color:#C9A45C;font-size:14px">{{ t.ftContact }}</span>
+        <a href="tel:+381666513388">066 651 3388</a>
+        <a href="{{ waHref }}" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="viber://chat?number=%2B381666513388">Viber</a>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <span style="color:#C9A45C;font-size:14px">{{ t.ftLoc }}</span>
+        <span>Svetogorska 16</span>
+        <span>31315 Zlatibor, Srbija</span>
+        <a href="{{ mapsUrl }}" target="_blank" rel="noopener" style="text-decoration:underline;text-underline-offset:3px">{{ t.ftMap }}</a>
+      </div>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-size:14px;color:#AEB8B0;padding-bottom:calc(32px + env(safe-area-inset-bottom))">
+      <span>© {{ year }} Gačanović Lux</span>
+      <span>{{ t.ftRating }}</span>
+    </div>
+  </div>
+  
+</footer>
+
+<sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+  <a href="{{ waHref }}" target="_blank" rel="noopener" aria-label="WhatsApp 066 651 3388" style="position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:80;width:60px;height:60px;border-radius:50%;background:#C9A45C;color:#12241C;display:flex;align-items:center;justify-content:center;box-shadow:0 14px 30px -10px rgba(0,0,0,0.5)" style-active="transform:scale(0.94)">
+    <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8a9.2 9.2 0 0 0-7.9 13.9L2.8 21.2l4.6-1.2A9.2 9.2 0 1 0 12 2.8Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"></path><path d="M8.6 7.6c.3-.4.7-.4 1-.3l.9 2c.1.3 0 .6-.2.8l-.5.6c.6 1.3 1.7 2.4 3.1 3.1l.6-.6c.2-.2.5-.3.8-.2l2 .9c.2.3.2.7-.2 1-.7.7-1.7 1-2.6.7-2.6-.8-4.6-2.8-5.4-5.4-.3-.9 0-1.9.5-2.6Z" fill="currentColor"></path></svg>
+  </a>
+</sc-if>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const WA = '381666513388';
+const MAPS_URL = 'https://www.google.com/maps/search/?api=1&query=Apartman+Ga%C4%8Danovi%C4%87+Lux+Zlatibor';
+
+// Udaljenosti su okvirne (od centra Zlatibora) – PROVERITI pre objave.
+const SRC = {"zl-centar":"web/Zlatibor_centar_i_jezero.jpg","zl-gondola":"web/Zlatibor_Gondola_Gold.jpg","zl-tornik":"web/Zlatibor_Tornik.jpg","zl-stopica":"web/Stopica_pecina.jpg","zl-sirogojno":"web/Sirogojno_Staro_selo.jpg","zl-mokragora":"web/Mokra_Gora_Sarganska_osmica.jpg"};
+const ATTR = [
+  { id: 'zl-centar', dist: ['Par minuta hoda', 'A few minutes’ walk'], sr: ['Centar i jezero', 'Šetalište oko jezera, kafići, restorani i pijaca sa domaćim proizvodima.'], en: ['Centre and lake', 'A promenade around the lake, cafés, restaurants and a market with local produce.'] },
+  { id: 'zl-gondola', dist: ['Polazi iz centra', 'Starts in the centre'], sr: ['Gondola Gold', 'Jedna od najdužih panoramskih gondola na svetu, od centra Zlatibora do Tornika.'], en: ['Gold Gondola', 'One of the longest panoramic gondolas in the world, from the centre of Zlatibor to Tornik.'] },
+  { id: 'zl-tornik', dist: ['~9 km', '~9 km'], sr: ['Tornik', 'Najviši vrh Zlatibora i ski centar – staze zimi, šetnje i bicikl leti.'], en: ['Tornik', 'Zlatibor’s highest peak and ski resort – slopes in winter, hiking and cycling in summer.'] },
+  { id: 'zl-stopica', dist: ['~19 km', '~19 km'], sr: ['Stopića pećina', 'Pećina sa nizom kamenih kada i podzemnom rekom.'], en: ['Stopića Cave', 'A cave with a series of stone pools and an underground river.'] },
+  { id: 'zl-sirogojno', dist: ['~25 km', '~25 km'], sr: ['Sirogojno', 'Muzej na otvorenom „Staro selo“ i čuveni ručno pleteni džemperi.'], en: ['Sirogojno', 'The open-air museum “Old Village” and its famous hand-knitted sweaters.'] },
+  { id: 'zl-mokragora', dist: ['~40 km', '~40 km'], sr: ['Mokra Gora', 'Šarganska osmica, muzejska pruga uskog koloseka, i Drvengrad.'], en: ['Mokra Gora', 'The Šargan Eight heritage narrow-gauge railway and Drvengrad.'] },
+];
+
+const T = {
+  sr: {
+    navHome: 'Početna', navApt: 'Apartman', navFloors: 'Spratovi', navContact: 'Kontakt', navInq: 'Upit', menu: 'Meni', close: 'Zatvori', langOther: 'EN', langLabel: 'Switch to English', ctaInq: 'Pošaljite upit',
+    ft: 'Vidimo se pod zlatnim borom', ftAbout: 'Dupleks od 120 m² za porodice i veće društvo, u centru Zlatibora.', ftPages: 'Stranice', ftContact: 'Kontakt', ftLoc: 'Lokacija', ftMap: 'Otvorite mapu', ftRating: '9,6 na Booking-u · 5,0 na Google-u',
+    badge: 'Planina sunca i borova', hero: 'Zlatibor', heroAlt: 'Pogled na zimski Zlatibor iz apartmana',
+    heroSub: 'Leti šetnje i jezero, zimi sneg i Tornik – a sve počinje iz centra, gde je apartman.',
+    attr: 'Šta posetiti', attrSub: 'Mesta do kojih se lako stiže iz apartmana – peške ili kolima.',
+    distNote: 'Udaljenosti su okvirne, od centra Zlatibora.',
+    map: 'Kako do nas', mapText: 'Apartman je u samom centru, sa sopstvenim parkingom ispred zgrade. Do svih mesta sa liste stiže se kolima za manje od sat vremena.',
+    mapLink: 'Otvorite u Google mapama', mapTitle: 'Mapa: Apartman Gačanović Lux, Zlatibor',
+  },
+  en: {
+    navHome: 'Home', navApt: 'Apartment', navFloors: 'Floors', navContact: 'Contact', navInq: 'Enquiry', menu: 'Menu', close: 'Close', langOther: 'SR', langLabel: 'Prebaci na srpski', ctaInq: 'Send an enquiry',
+    ft: 'See you under the golden pine', ftAbout: 'A 120 m² duplex for families and larger groups, in the centre of Zlatibor.', ftPages: 'Pages', ftContact: 'Contact', ftLoc: 'Location', ftMap: 'Open the map', ftRating: '9.6 on Booking.com · 5.0 on Google',
+    badge: 'Mountain of sun and pines', hero: 'Zlatibor', heroAlt: 'Winter view of Zlatibor from the apartment',
+    heroSub: 'Walks and the lake in summer, snow and Tornik in winter – and it all starts from the centre, where the apartment is.',
+    attr: 'What to see', attrSub: 'Places that are easy to reach from the apartment – on foot or by car.',
+    distNote: 'Distances are approximate, from the centre of Zlatibor.',
+    map: 'Getting here', mapText: 'The apartment is right in the centre, with private parking in front of the building. Everything on the list is under an hour away by car.',
+    mapLink: 'Open in Google Maps', mapTitle: 'Map: Apartman Gačanović Lux, Zlatibor',
+  },
+};
+
+class Component extends DCLogic {
+  state = (() => { let lang = 'sr'; try { lang = localStorage.getItem('gl_lang') || 'sr'; } catch (e) {} return { lang, isDesktop: true, menuOpen: false }; })();
+  R = ['curtain', 'curtainPine', 'nav', 'menu', 'hero', 'foot'].reduce((o, k) => (o[k] = React.createRef(), o), {});
+
+  componentDidMount() { const go = (n = 0) => window.GL ? window.GL.mount(this) : n < 200 && setTimeout(() => go(n + 1), 30); go(); }
+  componentWillUnmount() { window.GL && window.GL.unmount(this); }
+  componentDidUpdate(pp, ps) {
+    if (!window.GL) return;
+    if (ps.menuOpen !== this.state.menuOpen) window.GL.menu(this, this.state.menuOpen);
+    if (ps.lang !== this.state.lang) { document.documentElement.lang = this.state.lang; window.GL.refresh(); }
+  }
+
+  renderVals() {
+    const s = this.state, t = T[s.lang], L = s.lang, li = L === 'sr' ? 0 : 1, split = x => x.split(' ');
+    return {
+      t, isDesktop: s.isDesktop, isMobile: !s.isDesktop,
+      ...Object.fromEntries(Object.entries(this.R).map(([k, v]) => [k + 'Ref', v])),
+      toggleLang: () => this.setState(st => { const lang = st.lang === 'sr' ? 'en' : 'sr'; try { localStorage.setItem('gl_lang', lang); } catch (e) {} return { lang }; }),
+      openMenu: () => this.setState({ menuOpen: true }), closeMenu: () => this.setState({ menuOpen: false }), menuAria: s.menuOpen ? 'true' : 'false', menuVis: s.menuOpen ? 'visible' : 'hidden', menuClip: s.menuOpen ? 'inset(0 0 0% 0)' : 'inset(0 0 100% 0)', ...(() => { const rm = matchMedia('(prefers-reduced-motion: reduce)').matches, o = s.menuOpen; return { menuTr: rm ? 'none' : o ? 'clip-path 560ms cubic-bezier(0.77,0,0.175,1), visibility 0s' : 'clip-path 380ms cubic-bezier(0.77,0,0.175,1), visibility 0s 380ms', mlOp: o ? 1 : 0, mlTf: o ? 'none' : 'translateY(40px)', mlTr: rm ? 'none' : o ? 'opacity 700ms cubic-bezier(0.23,1,0.32,1), transform 700ms cubic-bezier(0.23,1,0.32,1)' : 'opacity 180ms ease-out, transform 180ms ease-out', mlD: Object.fromEntries([0, 1, 2, 3, 4, 5].map(k => ['d' + k, o && !rm ? (220 + k * 70) + 'ms' : '0ms'])) }; })(), 
+      heroWords: split(t.hero), attrWords: split(t.attr), mapWords: split(t.map), ftWords: split(t.ft),
+      attrs: ATTR.map(a => ({ id: a.id, src: SRC[a.id], name: a[L][0], text: a[L][1], dist: a.dist[li] })),
+      waHref: `https://wa.me/${WA}?text=${encodeURIComponent(L === 'sr' ? 'Zdravo, zanima me apartman Gačanović Lux.' : "Hello, I'm interested in Apartman Gačanović Lux.")}`,
+      mapsUrl: MAPS_URL, year: new Date().getFullYear(),
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Apartman – Gačanović Lux, Zlatibor</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#12241C">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 140'%3E%3Crect width='100' height='140' rx='20' fill='%2312241C'/%3E%3Cpath d='M50 14L64 42H57L73 72H62L82 108H54V128H46V108H18L38 72H27L43 42H36Z' fill='none' stroke='%23C9A45C' stroke-width='5' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Italiana&amp;family=Inter+Tight:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+.lenis.lenis-stopped{overflow:hidden}
+body{margin:0;background:#12241C;color:#18201C;font:400 17px/1.65 'Inter Tight',system-ui,sans-serif;-webkit-tap-highlight-color:transparent;-webkit-font-smoothing:antialiased;overflow-x:clip}
+button,a{touch-action:manipulation;font:inherit;color:inherit}
+img{display:block}
+a{color:inherit;text-decoration:none}
+@media (hover:hover) and (pointer:fine){a:hover{color:#C9A45C}}
+:focus-visible{outline:2px solid #C9A45C;outline-offset:3px}
+</style>
+</helmet>
+
+<div ref="{{ curtainRef }}" aria-hidden="true" style="position:fixed;inset:0;z-index:240;background:#12241C;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none">
+  <svg width="64" height="90" viewBox="0 0 100 140"><path ref="{{ curtainPineRef }}" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" d="M50 4L66 38H58L76 72H64L86 112H54V136H46V112H14L36 72H24L42 38H34Z" fill="none" stroke="#C9A45C" stroke-width="2.5" stroke-linejoin="round"></path></svg>
+</div>
+
+<header ref="{{ navRef }}" style="position:fixed;top:clamp(10px,1.6vw,20px);left:0;right:0;z-index:90;display:flex;justify-content:center;padding:0 clamp(10px,2vw,24px);pointer-events:none">
+  <div style="pointer-events:auto;width:100%;max-width:1240px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:8px 8px 8px 18px;border-radius:999px;background:rgba(18,36,28,0.6);backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%);border:1px solid rgba(201,164,92,0.3);color:#F5F4EF">
+    <a href="index.html" data-page="" style="display:flex;align-items:center;gap:10px;font-weight:500;font-size:17px;white-space:nowrap">
+      <svg width="18" height="25" viewBox="0 0 100 140" aria-hidden="true"><path d="M50 4L66 38H58L76 72H64L86 112H54V136H46V112H14L36 72H24L42 38H34Z" fill="none" stroke="#C9A45C" stroke-width="6" stroke-linejoin="round"></path></svg>
+      Gačanović Lux
+    </a>
+    <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+      <nav aria-label="Navigacija" style="display:flex;align-items:center;gap:30px;font-size:15px">
+        <a href="#top" data-anchor="" aria-current="page" style="color:#C9A45C">{{ t.navApt }}</a>
+        <a href="zlatibor.html" data-page="" style="color:#F5F4EF">Zlatibor</a>
+        <a href="#kontakt" data-anchor="" style="color:#F5F4EF">{{ t.navContact }}</a>
+      </nav>
+    </sc-if>
+    <div style="display:flex;align-items:center;gap:6px">
+      <button type="button" onClick="{{ toggleLang }}" aria-label="{{ t.langLabel }}" style="height:44px;min-width:44px;padding:0 12px;border:0;border-radius:999px;background:transparent;color:#F5F4EF;font-weight:500;font-size:14px;cursor:pointer">{{ t.langOther }}</button>
+      <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+        <a href="rezervacija.html" data-page="" data-btn="" style="white-space:nowrap;position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:10px;height:44px;padding:0 20px;border-radius:999px;background:#C9A45C;color:#12241C;font-weight:600;font-size:15px;transition:transform 120ms cubic-bezier(0.23,1,0.32,1)" style-active="transform:scale(0.97)">
+          <span data-sheen="" aria-hidden="true" style="position:absolute;top:0;bottom:0;left:0;width:60%;background:linear-gradient(100deg,transparent,rgba(255,248,225,0.6),transparent);transform:translateX(-160%);pointer-events:none"></span>
+          <span style="position:relative">{{ t.ctaInq }}</span>
+          <span data-arrow="" aria-hidden="true" style="position:relative;display:inline-flex"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>
+        </a>
+      </sc-if>
+      <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+        <button type="button" onClick="{{ openMenu }}" aria-expanded="{{ menuAria }}" style="height:44px;padding:0 18px;border:0;border-radius:999px;background:#C9A45C;color:#12241C;font-weight:600;cursor:pointer" style-active="transform:scale(0.97)">{{ t.menu }}</button>
+      </sc-if>
+    </div>
+  </div>
+</header>
+
+<sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+  <div ref="{{ menuRef }}" role="dialog" aria-modal="true" aria-label="{{ t.menu }}" style="position:fixed;inset:0;z-index:120;background:#12241C;color:#F5F4EF;display:flex;flex-direction:column;padding:calc(20px + env(safe-area-inset-top)) 24px calc(32px + env(safe-area-inset-bottom));visibility:{{ menuVis }};clip-path:{{ menuClip }};transition:{{ menuTr }};overflow:hidden">
+    <svg aria-hidden="true" viewBox="0 0 100 140" style="position:absolute;right:-18%;bottom:-6%;width:90%;opacity:0.12"><path d="M50 4L66 38H58L76 72H64L86 112H54V136H46V112H14L36 72H24L42 38H34Z" fill="none" stroke="#C9A45C" stroke-width="0.8" stroke-linejoin="round"></path></svg>
+    <div style="position:relative;display:flex;justify-content:space-between;align-items:center;height:48px">
+      <span style="display:flex;align-items:center;gap:10px;font-weight:500"><svg width="18" height="25" viewBox="0 0 100 140" aria-hidden="true"><path d="M50 4L66 38H58L76 72H64L86 112H54V136H46V112H14L36 72H24L42 38H34Z" fill="none" stroke="#C9A45C" stroke-width="6" stroke-linejoin="round"></path></svg>Gačanović Lux</span>
+      <button type="button" onClick="{{ closeMenu }}" style="height:44px;padding:0 18px;border:1px solid rgba(201,164,92,0.4);border-radius:999px;background:transparent;color:#F5F4EF;cursor:pointer">{{ t.close }}</button>
+    </div>
+    <nav style="position:relative;margin-top:auto;display:flex;flex-direction:column;gap:2px">
+      <a data-mlink="" href="index.html" data-page="" onClick="{{ closeMenu }}" style="font-family:'Italiana',serif;font-size:clamp(48px,14vw,72px);line-height:1.08;opacity:{{ mlOp }};transform:{{ mlTf }};transition:{{ mlTr }};transition-delay:{{ mlD.d0 }}">{{ t.navHome }}</a>
+      <a data-mlink="" href="zlatibor.html" data-page="" onClick="{{ closeMenu }}" style="font-family:'Italiana',serif;font-size:clamp(48px,14vw,72px);line-height:1.08;opacity:{{ mlOp }};transform:{{ mlTf }};transition:{{ mlTr }};transition-delay:{{ mlD.d1 }}">Zlatibor</a>
+      <a data-mlink="" href="#kontakt" data-anchor="" onClick="{{ closeMenu }}" style="font-family:'Italiana',serif;font-size:clamp(48px,14vw,72px);line-height:1.08;opacity:{{ mlOp }};transform:{{ mlTf }};transition:{{ mlTr }};transition-delay:{{ mlD.d2 }}">{{ t.navContact }}</a>
+    </nav>
+    <a data-mlink="" href="rezervacija.html" data-page="" onClick="{{ closeMenu }}" style="position:relative;margin-top:40px;display:flex;align-items:center;justify-content:center;height:56px;border-radius:999px;background:#C9A45C;color:#12241C;font-weight:600;opacity:{{ mlOp }};transform:{{ mlTf }};transition:{{ mlTr }};transition-delay:{{ mlD.d3 }}">{{ t.ctaInq }}</a>
+  </div>
+</sc-if>
+
+<main id="top">
+  <section ref="{{ heroRef }}" style="position:relative;min-height:100svh;background:#12241C;color:#F5F4EF;overflow:hidden;display:flex;align-items:center;padding:clamp(110px,12vw,150px) clamp(20px,4vw,40px) clamp(40px,5vw,72px)">
+    <svg aria-hidden="true" viewBox="0 0 100 140" preserveAspectRatio="xMidYMid meet" style="position:absolute;right:max(-10vw, calc((100vw - 1240px) / 2 - 4vw));top:50%;transform:translateY(-50%);height:min(88svh,900px);width:auto;opacity:0.9">
+      <path ref="{{ heroPineRef }}" pathLength="1" stroke-dasharray="1" stroke-dashoffset="0" d="M50 4L66 38H58L76 72H64L86 112H54V136H46V112H14L36 72H24L42 38H34Z" fill="none" stroke="#C9A45C" stroke-width="0.35" stroke-linejoin="round"></path>
+    </svg>
+    <div style="position:relative;max-width:1240px;width:100%;margin:0 auto;display:flex;flex-direction:column;gap:28px">
+      <span data-hero-in="" style="align-self:flex-start;display:inline-flex;align-items:center;gap:8px;height:34px;padding:0 14px;border-radius:999px;border:1px solid rgba(201,164,92,0.45);font-size:14px;font-weight:500;white-space:nowrap">
+        <svg width="10" height="14" viewBox="0 0 100 140" aria-hidden="true"><path d="M50 4L66 38H58L76 72H64L86 112H54V136H46V112H14L36 72H24L42 38H34Z" fill="#C9A45C"></path></svg>{{ t.badge }}
+      </span>
+      <h1 data-hero-words="" style="margin:0;font-family:'Italiana',serif;font-weight:400;font-size:clamp(72px,14vw,220px);line-height:0.88;letter-spacing:-0.01em">
+        <sc-for list="{{ heroWords }}" as="w" hint-placeholder-count="1"><span data-w="" style="display:inline-block">{{ w }}</span> </sc-for>
+      </h1>
+      <p data-hero-in="" style="margin:0;max-width:44ch;font-size:clamp(17px,1.4vw,20px);color:#DCE2DA;text-wrap:pretty">{{ t.heroSub }}</p>
+      <div data-hero-in="" style="display:flex;flex-wrap:wrap;gap:10px 28px;color:#C9A45C;font-size:15px">
+        <sc-for list="{{ t.facts }}" as="f" hint-placeholder-count="4"><span style="white-space:nowrap">{{ f }}</span></sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:#F5F4EF;padding:clamp(80px,10vw,140px) clamp(20px,4vw,40px)">
+    <div style="max-width:1240px;margin:0 auto">
+      <div style="display:flex;flex-direction:column;gap:18px;margin-bottom:clamp(40px,5vw,72px)">
+        <svg width="22" height="31" viewBox="0 0 100 140" aria-hidden="true"><path d="M50 4L66 38H58L76 72H64L86 112H54V136H46V112H14L36 72H24L42 38H34Z" fill="none" stroke="#A9764B" stroke-width="5" stroke-linejoin="round"></path></svg>
+        <h2 data-words="" style="margin:0;font-family:'Italiana',serif;font-weight:400;font-size:clamp(46px,6vw,96px);line-height:0.95;color:#18201C">
+          <sc-for list="{{ roomsWords }}" as="w"><span data-w="" style="display:inline-block">{{ w }}</span> </sc-for>
+        </h2>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:clamp(16px,2vw,24px)">
+        <div role="tablist" aria-label="{{ t.roomsTabs }}" style="display:flex;flex-wrap:wrap;gap:6px;padding:5px;border-radius:24px;background:#DCE2DA;align-self:flex-start;max-width:100%">
+          <sc-for list="{{ roomList }}" as="r" hint-placeholder-count="7">
+            <button type="button" role="tab" aria-selected="{{ r.cur }}" onClick="{{ r.go }}" style="flex:none;height:{{ tabH }};padding:0 clamp(12px,1.6vw,18px);border:0;border-radius:999px;background:{{ r.bg }};color:{{ r.fg }};font-size:clamp(14px,1.2vw,15px);font-weight:500;cursor:pointer;white-space:nowrap">{{ r.name }}</button>
+          </sc-for>
+        </div>
+        <div style="display:flex;flex-wrap:wrap-reverse;gap:clamp(16px,2vw,24px);align-items:stretch">
+          <div ref="{{ roomTextRef }}" style="flex:1 1 300px;display:flex;flex-direction:column;justify-content:space-between;gap:28px;padding:clamp(24px,3vw,36px);border-radius:28px;background:#DCE2DA">
+            <div style="display:flex;flex-direction:column;gap:14px">
+              <span style="color:#6B5323;font-size:15px">{{ act.floor }}</span>
+              <h3 style="margin:0;font-family:'Italiana',serif;font-weight:400;font-size:clamp(34px,3.8vw,60px);line-height:1;color:#18201C">{{ act.name }}</h3>
+              <p style="margin:0;color:#3E4842;text-wrap:pretty;max-width:38ch">{{ act.text }}</p>
+              <ul style="list-style:none;margin:4px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px">
+                <sc-for list="{{ act.tags }}" as="tg"><li style="padding:6px 12px;border-radius:999px;background:#F5F4EF;font-size:15px">{{ tg }}</li></sc-for>
+              </ul>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:18px;border-top:1px solid rgba(24,32,28,0.12)">
+              <span aria-live="polite" style="font-variant-numeric:tabular-nums;color:#3E4842">{{ photoCounter }}</span>
+              <div style="display:flex;gap:8px">
+                <button type="button" onClick="{{ prevPhoto }}" aria-label="{{ t.prevP }}" style="width:48px;height:48px;border-radius:50%;border:1px solid #18201C;background:transparent;color:#18201C;cursor:pointer;display:flex;align-items:center;justify-content:center" style-active="transform:scale(0.94)"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2"></path></svg></button>
+                <button type="button" onClick="{{ nextPhoto }}" aria-label="{{ t.nextP }}" style="width:48px;height:48px;border-radius:50%;border:0;background:#12241C;color:#C9A45C;cursor:pointer;display:flex;align-items:center;justify-content:center" style-active="transform:scale(0.94)"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2"></path></svg></button>
+              </div>
+            </div>
+          </div>
+          <div style="flex:2.2 1 480px;min-width:0;display:flex;flex-direction:column;gap:10px">
+            <div onTouchStart="{{ onTS }}" onTouchEnd="{{ onTE }}" style="position:relative;border-radius:{{ photoRad }};overflow:hidden;background:#DCE2DA;aspect-ratio:{{ photoAR }}">
+              <img ref="{{ photoRef }}" src="{{ photo.src }}" alt="{{ photo.alt }}" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px">
+              <sc-for list="{{ thumbs }}" as="th" hint-placeholder-count="3">
+                <button type="button" onClick="{{ th.on }}" aria-label="{{ th.label }}" aria-pressed="{{ th.cur }}" style="padding:0;border:2px solid {{ th.bd }};border-radius:16px;overflow:hidden;aspect-ratio:3/2;background:#DCE2DA;cursor:pointer;opacity:{{ th.op }};transition:opacity 150ms ease-out">
+                  <img src="{{ th.src }}" alt="" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover">
+                </button>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:#12241C;color:#F5F4EF;padding:clamp(80px,10vw,140px) clamp(20px,4vw,40px)">
+    <div style="max-width:1240px;margin:0 auto;display:flex;flex-wrap:wrap;gap:clamp(32px,5vw,80px)">
+      <div style="flex:1 1 300px;display:flex;flex-direction:column;gap:18px">
+        <svg width="22" height="31" viewBox="0 0 100 140" aria-hidden="true"><path d="M50 4L66 38H58L76 72H64L86 112H54V136H46V112H14L36 72H24L42 38H34Z" fill="none" stroke="#C9A45C" stroke-width="5" stroke-linejoin="round"></path></svg>
+        <h2 data-words="" style="margin:0;font-family:'Italiana',serif;font-weight:400;font-size:clamp(46px,6vw,96px);line-height:0.95">
+          <sc-for list="{{ rulesWords }}" as="w"><span data-w="" style="display:inline-block">{{ w }}</span> </sc-for>
+        </h2>
+        <p style="margin:0;color:#DCE2DA;max-width:34ch">{{ t.rulesSub }}</p>
+      </div>
+      <dl data-stagger="" style="flex:1.4 1 420px;margin:0;padding:clamp(20px,3vw,40px);border-radius:28px;border:1px solid rgba(201,164,92,0.35);background:linear-gradient(180deg,#16291F,#102019)">
+        <sc-for list="{{ t.rules }}" as="r" hint-placeholder-count="7">
+          <div style="display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px;align-items:baseline;padding:18px 0;border-bottom:1px solid rgba(201,164,92,0.25)">
+            <dt style="font-family:'Italiana',serif;font-size:clamp(24px,2.2vw,30px)">{{ r.k }}</dt>
+            <dd style="margin:0;color:#C9A45C;text-align:right">{{ r.v }}</dd>
+          </div>
+        </sc-for>
+      </dl>
+    </div>
+  </section>
+</main>
+
+<footer id="kontakt" ref="{{ footRef }}" style="background:#12241C;color:#F5F4EF;border-top:1px solid rgba(201,164,92,0.3);overflow:hidden;padding:clamp(72px,9vw,128px) clamp(20px,4vw,40px) 0">
+  <div style="max-width:1240px;margin:0 auto">
+    <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:32px;padding-bottom:clamp(48px,6vw,88px);border-bottom:1px solid rgba(201,164,92,0.3)">
+      <h2 data-words="" style="margin:0;font-family:'Italiana',serif;font-weight:400;font-size:clamp(52px,7.6vw,124px);line-height:0.95;max-width:11ch">
+        <sc-for list="{{ ftWords }}" as="w"><span data-w="" style="display:inline-block">{{ w }}</span> </sc-for>
+      </h2>
+      <a href="rezervacija.html" data-page="" data-btn="" style="white-space:nowrap;position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:12px;height:60px;padding:0 30px;border-radius:999px;background:#C9A45C;color:#12241C;font-weight:600;font-size:17px;transition:transform 120ms cubic-bezier(0.23,1,0.32,1)" style-active="transform:scale(0.97)">
+        <span data-sheen="" aria-hidden="true" style="position:absolute;top:0;bottom:0;left:0;width:60%;background:linear-gradient(100deg,transparent,rgba(255,248,225,0.6),transparent);transform:translateX(-160%);pointer-events:none"></span>
+        <span style="position:relative">{{ t.ctaInq }}</span>
+        <span data-arrow="" aria-hidden="true" style="position:relative;display:inline-flex"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>
+      </a>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:36px;padding:clamp(40px,5vw,64px) 0">
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <span style="display:flex;align-items:center;gap:10px;font-weight:500"><svg width="18" height="25" viewBox="0 0 100 140" aria-hidden="true"><path d="M50 4L66 38H58L76 72H64L86 112H54V136H46V112H14L36 72H24L42 38H34Z" fill="none" stroke="#C9A45C" stroke-width="6" stroke-linejoin="round"></path></svg>Gačanović Lux</span>
+        <p style="margin:0;color:#DCE2DA;max-width:28ch">{{ t.ftAbout }}</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <span style="color:#C9A45C;font-size:14px">{{ t.ftPages }}</span>
+        <a href="index.html" data-page="">{{ t.navHome }}</a>
+        <a href="zlatibor.html" data-page="">Zlatibor</a>
+        <a href="rezervacija.html" data-page="">{{ t.navInq }}</a>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <span style="color:#C9A45C;font-size:14px">{{ t.ftContact }}</span>
+        <a href="tel:+381666513388">066 651 3388</a>
+        <a href="{{ waHref }}" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="viber://chat?number=%2B381666513388">Viber</a>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <span style="color:#C9A45C;font-size:14px">{{ t.ftLoc }}</span>
+        <span>Svetogorska 16</span>
+        <span>31315 Zlatibor, Srbija</span>
+        <a href="{{ mapsUrl }}" target="_blank" rel="noopener" style="text-decoration:underline;text-underline-offset:3px">{{ t.ftMap }}</a>
+      </div>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-size:14px;color:#AEB8B0;padding-bottom:calc(32px + env(safe-area-inset-bottom))">
+      <span>© {{ year }} Gačanović Lux</span>
+      <span>{{ t.ftRating }}</span>
+    </div>
+  </div>
+  
+</footer>
+
+<sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+  <a href="{{ waHref }}" target="_blank" rel="noopener" aria-label="WhatsApp 066 651 3388" style="position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:80;width:60px;height:60px;border-radius:50%;background:#C9A45C;color:#12241C;display:flex;align-items:center;justify-content:center;box-shadow:0 14px 30px -10px rgba(0,0,0,0.5)" style-active="transform:scale(0.94)">
+    <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8a9.2 9.2 0 0 0-7.9 13.9L2.8 21.2l4.6-1.2A9.2 9.2 0 1 0 12 2.8Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"></path><path d="M8.6 7.6c.3-.4.7-.4 1-.3l.9 2c.1.3 0 .6-.2.8l-.5.6c.6 1.3 1.7 2.4 3.1 3.1l.6-.6c.2-.2.5-.3.8-.2l2 .9c.2.3.2.7-.2 1-.7.7-1.7 1-2.6.7-2.6-.8-4.6-2.8-5.4-5.4-.3-.9 0-1.9.5-2.6Z" fill="currentColor"></path></svg>
+  </a>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const WA = '381666513388';
+const MAPS_URL = 'https://www.google.com/maps/search/?api=1&query=Apartman+Ga%C4%8Danovi%C4%87+Lux+Zlatibor';
+const P = n => `web/Gacanovic_${n}.jpg`;
+const IO_EASE = 'cubic-bezier(0.77,0,0.175,1)';
+const EASE = 'cubic-bezier(0.23,1,0.32,1)';
+
+// Raspored po spratovima i fotografije soba – PROVERITI SA VLASNIKOM.
+const FLOORS = {
+  1: { photos: [1, 10, 13, 36], sr: { label: 'Sprat 1 · prizemlje', title: 'Dnevni deo', text: 'Prostor za zajedničko vreme: dnevna soba, kuhinja sa trpezarijom i terasa prema borovoj šumi.', rooms: [['Dnevna soba', '2 kauča na razvlačenje'], ['Kuhinja i trpezarija', 'Sav pribor, aparat za kafu'], ['Kupatilo', 'Peškiri i fen'], ['Terasa', 'Pogled na borovu šumu']] },
+       en: { label: 'Floor 1 · ground', title: 'Living floor', text: 'Space for time together: living room, kitchen with dining area and a terrace facing the pine forest.', rooms: [['Living room', '2 sofa beds'], ['Kitchen and dining', 'Fully equipped, coffee machine'], ['Bathroom', 'Towels and hairdryer'], ['Terrace', 'Pine forest view']] } },
+  2: { photos: [21, 18, 25, 20], sr: { label: 'Sprat 2', title: 'Spavaći deo', text: 'Tri spavaće sobe za mirne noći, odvojene od dnevnog dela.', rooms: [['Soba 1', 'Bračni krevet'], ['Soba 2', 'Bračni + jedan krevet'], ['Soba 3', 'Dva kreveta']] },
+       en: { label: 'Floor 2', title: 'Sleeping floor', text: 'Three bedrooms for quiet nights, separate from the living area.', rooms: [['Bedroom 1', 'Double bed'], ['Bedroom 2', 'Double + single bed'], ['Bedroom 3', 'Two single beds']] } },
+};
+const ALTS = { 1: ['Dnevna soba', 'Living room'], 10: ['Kuhinja', 'Kitchen'], 13: ['Terasa', 'Terrace'], 36: ['Kupatilo', 'Bathroom'], 21: ['Soba 2', 'Bedroom 2'], 18: ['Soba 3', 'Bedroom 3'], 25: ['Soba 1', 'Bedroom 1'], 20: ['Soba 3', 'Bedroom 3'] };
+
+// Prostorije redom: Dnevna → Kuhinja → Soba 1 → Soba 2 → Soba 3 → Kupatilo → Terasa
+const ROOMS = [
+  { floor: 1, imgs: [1, 5, 15], sr: ['Dnevna soba', 'Velika, svetla dnevna soba sa dva kauča na razvlačenje, TV-om i trpezarijskim stolom za celo društvo.', ['2 kauča na razvlačenje', 'TV', 'Klima']], en: ['Living room', 'A large, bright living room with two sofa beds, a TV and a dining table for the whole group.', ['2 sofa beds', 'TV', 'Air conditioning']] },
+  { floor: 1, imgs: [10, 9, 38], sr: ['Kuhinja', 'Potpuno opremljena kuhinja sa trpezarijom – za doručak bez žurbe i zajedničke večere.', ['Sav pribor', 'Aparat za kafu', 'Trpezarija']], en: ['Kitchen', 'A fully equipped kitchen with dining area – for slow breakfasts and shared dinners.', ['Full kitchenware', 'Coffee machine', 'Dining area']] },
+  { floor: 2, imgs: [25, 27, 28], sr: ['Soba 1', 'Mirna soba sa bračnim krevetom i kosim prozorima pod krovom.', ['Bračni krevet', 'Posteljina']], en: ['Bedroom 1', 'A quiet room with a double bed and slanted windows under the roof.', ['Double bed', 'Bed linen']] },
+  { floor: 2, imgs: [21, 23, 22], sr: ['Soba 2', 'Soba sa bračnim i jednim krevetom – pogodna za roditelje sa detetom. Krevetac za bebe na zahtev.', ['Bračni + jedan krevet', 'Krevetac na zahtev']], en: ['Bedroom 2', 'A room with a double and a single bed – ideal for parents with a child. Baby cot on request.', ['Double + single bed', 'Cot on request']] },
+  { floor: 2, imgs: [18, 20, 19], sr: ['Soba 3', 'Soba sa dva kreveta, za decu ili prijatelje.', ['Dva kreveta']], en: ['Bedroom 3', 'A room with two beds, for children or friends.', ['Two single beds']] },
+  { floor: 1, imgs: [36, 40, 35], sr: ['Kupatilo', 'Moderno kupatilo sa tušem, uvek besprekorno čisto. Peškiri su spremni.', ['Tuš', 'Peškiri', 'Fen']], en: ['Bathroom', 'A modern bathroom with a shower, always spotless. Towels are ready.', ['Shower', 'Towels', 'Hairdryer']] },
+  { floor: 1, imgs: [13, 14, 42], sr: ['Terasa', 'Terasa sa pogledom na borovu šumu – za jutarnju kafu i večernju tišinu.', ['Pogled na šumu', 'Sto i stolice']], en: ['Terrace', 'A terrace overlooking the pine forest – for morning coffee and quiet evenings.', ['Forest view', 'Table and chairs']] },
+];
+
+const T = {
+  sr: {
+    navHome: 'Početna', navApt: 'Apartman', navFloors: 'Spratovi', navContact: 'Kontakt', navInq: 'Upit', menu: 'Meni', close: 'Zatvori', langOther: 'EN', langLabel: 'Switch to English',
+    ctaInq: 'Pošaljite upit', badge: 'Dupleks · Svetogorska 16', hero: 'Apartman',
+    heroSub: 'Dva sprata, 120 m², tri spavaće sobe i terasa prema borovoj šumi. Prostor u kome se porodica i društvo ne sapliću jedni o druge.',
+    facts: ['120 m²', '2 sprata', '3 spavaće sobe', 'do 9 osoba', 'Lift i parking'],
+    lift: 'Dva sprata, jedan dom', liftSub: 'Izaberite sprat kao u liftu i pogledajte šta vas čeka.', liftGroup: 'Izbor sprata', liftHint: 'Izaberite sprat', floorBtn: 'Sprat', floorN: 'Sprat',
+    rooms: 'Prostorija po prostorija', roomsTabs: 'Prostorije', prevP: 'Prethodna fotografija', nextP: 'Sledeća fotografija', of: 'od',
+    rulesT: 'Kućni red', rulesSub: 'Nekoliko jednostavnih pravila, da svi gosti uživaju u miru.',
+    rules: [{ k: 'Prijava', v: '14–22h' }, { k: 'Odjava', v: '9–11h' }, { k: 'Tišina', v: '22–07h' }, { k: 'Kućni ljubimci', v: 'Nisu dozvoljeni' }, { k: 'Zabave', v: 'Nisu dozvoljene' }, { k: 'Plaćanje', v: 'Gotovinom' }, { k: 'Krevetac za bebe', v: 'Besplatno' }],
+    ft: 'Vidimo se pod zlatnim borom', ftAbout: 'Dupleks od 120 m² za porodice i veće društvo, u centru Zlatibora.', ftPages: 'Stranice', ftContact: 'Kontakt', ftLoc: 'Lokacija', ftMap: 'Otvorite mapu', ftRating: '9,6 na Booking-u · 5,0 na Google-u',
+  },
+  en: {
+    navHome: 'Home', navApt: 'Apartment', navFloors: 'Floors', navContact: 'Contact', navInq: 'Enquiry', menu: 'Menu', close: 'Close', langOther: 'SR', langLabel: 'Prebaci na srpski',
+    ctaInq: 'Send an enquiry', badge: 'Duplex · Svetogorska 16', hero: 'Apartment',
+    heroSub: 'Two floors, 120 m², three bedrooms and a terrace facing the pine forest. Room for family and friends to spread out.',
+    facts: ['120 m²', '2 floors', '3 bedrooms', 'up to 9 guests', 'Lift and parking'],
+    lift: 'Two floors, one home', liftSub: 'Pick a floor, like in a lift, and see what awaits you.', liftGroup: 'Choose a floor', liftHint: 'Choose a floor', floorBtn: 'Floor', floorN: 'Floor',
+    rooms: 'Room by room', roomsTabs: 'Rooms', prevP: 'Previous photo', nextP: 'Next photo', of: 'of',
+    rulesT: 'House rules', rulesSub: 'A few simple rules, so every guest can enjoy the quiet.',
+    rules: [{ k: 'Check-in', v: '2–10 pm' }, { k: 'Check-out', v: '9–11 am' }, { k: 'Quiet hours', v: '10 pm–7 am' }, { k: 'Pets', v: 'Not allowed' }, { k: 'Parties', v: 'Not allowed' }, { k: 'Payment', v: 'Cash' }, { k: 'Baby cot', v: 'Free' }],
+    ft: 'See you under the golden pine', ftAbout: 'A 120 m² duplex for families and larger groups, in the centre of Zlatibor.', ftPages: 'Pages', ftContact: 'Contact', ftLoc: 'Location', ftMap: 'Open the map', ftRating: '9.6 on Booking.com · 5.0 on Google',
+  },
+};
+const reduced = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const wait = ms => new Promise(r => setTimeout(r, ms));
+
+class Component extends DCLogic {
+  state = (() => { let lang = 'sr'; try { lang = localStorage.getItem('gl_lang') || 'sr'; } catch (e) {} return { lang, isDesktop: true, menuOpen: false, floor: 1, active: 0 }; })();
+  R = ['curtain', 'curtainPine', 'nav', 'menu', 'hero', 'heroPine', 'liftSec', 'disp', 'floor', 'doorL', 'doorR', 'roomText', 'photo', 'foot', 'bigFill'].reduce((o, k) => (o[k] = React.createRef(), o), {});
+
+  componentDidMount() {
+    const R = this.R;
+    document.documentElement.lang = this.state.lang;
+    this.mqD = matchMedia('(min-width: 900px)'); this.onMq = () => this.setState({ isDesktop: this.mqD.matches }, () => this.observeRooms());
+    this.mqD.addEventListener('change', this.onMq); this.onMq();
+    this.onKey = e => { if (e.key === 'Escape' && this.state.menuOpen) this.setState({ menuOpen: false }); };
+    window.addEventListener('keydown', this.onKey);
+    this.onClick = e => {
+      const a = e.target.closest && e.target.closest('a'); if (!a || e.metaKey || e.ctrlKey || e.shiftKey) return;
+      if (a.hasAttribute('data-anchor')) { const id = a.getAttribute('href'), el = id === '#top' ? null : document.querySelector(id); e.preventDefault(); this.scrollTo(el ? el.getBoundingClientRect().top + scrollY - 80 : 0); }
+      else if (a.hasAttribute('data-page')) { e.preventDefault(); this.goPage(a.getAttribute('href')); }
+    };
+    document.addEventListener('click', this.onClick);
+    let lastY = scrollY;
+    this.onScroll = () => { const y = scrollY, nav = R.nav.current; if (!nav) return; const hide = y > lastY && y > 160; if (hide !== this.navHidden) { this.navHidden = hide; nav.style.transition = `transform ${hide ? 380 : 480}ms ${EASE}`; nav.style.transform = hide ? 'translateY(-150%)' : 'none'; } lastY = y; };
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+    this.io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting && !this.liftOpened) { this.liftOpened = true; this.openDoors(); } }), { threshold: 0.35 });
+    R.liftSec.current && this.io.observe(R.liftSec.current);
+
+    let incoming = null; try { incoming = sessionStorage.getItem('gl_next'); sessionStorage.removeItem('gl_next'); } catch (e) {}
+    const rm = reduced();
+    if (incoming && R.curtain.current && !rm) {
+      const c = R.curtain.current; c.style.opacity = '1'; R.curtainPine.current.style.strokeDashoffset = '0';
+      c.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 600, delay: 200, easing: EASE, fill: 'forwards' });
+    }
+    if (!rm) {
+      const d = incoming ? 450 : 100, pine = R.heroPine.current, hero = R.hero.current;
+      pine && pine.animate([{ strokeDashoffset: 1 }, { strokeDashoffset: 0 }], { duration: 1800, delay: d, easing: IO_EASE, fill: 'backwards' });
+      hero.querySelectorAll('[data-hero-words] [data-w]').forEach((w, i) => w.animate([{ opacity: 0, filter: 'blur(14px)', transform: 'translateY(14%)' }, { opacity: 1, filter: 'blur(0)', transform: 'none' }], { duration: 1100, delay: d + 300 + i * 60, easing: EASE, fill: 'backwards' }));
+      hero.querySelectorAll('[data-hero-in]').forEach((w, i) => w.animate([{ opacity: 0, transform: 'translateY(16px)' }, { opacity: 1, transform: 'none' }], { duration: 900, delay: d + 500 + i * 90, easing: EASE, fill: 'backwards' }));
+    }
+    this.waitLibs(() => this.initAnim());
+  }
+  componentWillUnmount() {
+    this.mqD.removeEventListener('change', this.onMq); window.removeEventListener('keydown', this.onKey); window.removeEventListener('scroll', this.onScroll);
+    document.removeEventListener('click', this.onClick); this.io && this.io.disconnect(); this.roomIo && this.roomIo.disconnect();
+    this.ctx && this.ctx.revert(); this.lenis && this.lenis.destroy(); this.tick && window.gsap.ticker.remove(this.tick);
+  }
+  componentDidUpdate(pp, ps) {
+    const s = this.state, R = this.R;
+    if (ps.lang !== s.lang) { document.documentElement.lang = s.lang; this.refresh(); }
+    if (ps.floor !== s.floor) {
+      R.disp.current && R.disp.current.animate([{ transform: `translateY(${s.floor > ps.floor ? 70 : -70}%)`, opacity: 0 }, { transform: 'none', opacity: 1 }], { duration: 260, easing: EASE });
+      if (this.fadeFloor && R.floor.current) R.floor.current.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 200, easing: 'ease-out' });
+    }
+    if ((ps.active !== s.active || ps.photo !== s.photo) && R.photo.current && !reduced()) R.photo.current.animate([{ opacity: 0.35 }, { opacity: 1 }], { duration: 200, easing: 'ease-out' });
+    if (ps.active !== s.active && R.roomText.current) R.roomText.current.animate([{ opacity: 0, transform: 'translateY(8px)' }, { opacity: 1, transform: 'none' }], { duration: 320, easing: EASE });
+    if (ps.menuOpen !== s.menuOpen) this.animMenu(s.menuOpen);
+  }
+  refresh() { clearTimeout(this.rt); this.rt = setTimeout(() => window.ScrollTrigger && window.ScrollTrigger.refresh(), 150); }
+  waitLibs(cb, n = 0) { if (window.gsap && window.ScrollTrigger) cb(); else if (n < 100) setTimeout(() => this.waitLibs(cb, n + 1), 50); }
+  scrollTo(top) { this.lenis ? this.lenis.scrollTo(top, { duration: 1.3 }) : window.scrollTo({ top, behavior: reduced() ? 'auto' : 'smooth' }); }
+
+  observeRooms() {
+    this.roomIo && this.roomIo.disconnect();
+    if (!this.state.isDesktop) return;
+    this.roomIo = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) { const i = +en.target.dataset.room; if (i !== this.state.active) this.setState({ active: i }); } }), { rootMargin: '-45% 0px -45% 0px' });
+    setTimeout(() => document.querySelectorAll('[data-room]').forEach(el => this.roomIo.observe(el)), 50);
+  }
+  goRoom(i) { this.setState({ active: i, photo: 0 }); }
+  stepPhoto(d) { this.setState(s => { let a = s.active, p = (s.photo || 0) + d; if (p >= ROOMS[a].imgs.length) { a = (a + 1) % ROOMS.length; p = 0; } else if (p < 0) { a = (a - 1 + ROOMS.length) % ROOMS.length; p = ROOMS[a].imgs.length - 1; } return { active: a, photo: p }; }); }
+
+  doorAnim(open, dur) {
+    const L = this.R.doorL.current, Rr = this.R.doorR.current; if (!L || !Rr) return Promise.resolve();
+    const tL = open ? 'translateX(-101%)' : 'translateX(0)', tR = open ? 'translateX(101%)' : 'translateX(0)';
+    const fL = open ? 'translateX(0)' : 'translateX(-101%)', fR = open ? 'translateX(0)' : 'translateX(101%)';
+    const a = L.animate([{ transform: fL }, { transform: tL }], { duration: dur, easing: IO_EASE }), b = Rr.animate([{ transform: fR }, { transform: tR }], { duration: dur, easing: IO_EASE });
+    L.style.transform = tL; Rr.style.transform = tR;
+    return Promise.all([a.finished, b.finished]).catch(() => {});
+  }
+  async openDoors() { if (reduced()) return; this.busy = true; await wait(200); await this.doorAnim(true, 600); this.doorsOpen = true; this.busy = false; }
+  goFloor = async (f, viaKey) => {
+    if (this.busy || (f === this.state.floor && this.doorsOpen)) return;
+    if (viaKey || reduced() || !this.R.doorL.current) {
+      this.fadeFloor = true; this.setState({ floor: f });
+      if (!this.doorsOpen && this.R.doorL.current) { this.R.doorL.current.style.transform = 'translateX(-101%)'; this.R.doorR.current.style.transform = 'translateX(101%)'; this.doorsOpen = true; this.liftOpened = true; }
+      return;
+    }
+    this.busy = true; this.fadeFloor = false; this.liftOpened = true;
+    if (this.doorsOpen) { await this.doorAnim(false, 300); this.doorsOpen = false; }
+    this.setState({ floor: f }); await wait(180);
+    await this.doorAnim(true, 600); this.doorsOpen = true; this.busy = false;
+  };
+
+  initAnim() {
+    const g = window.gsap, ST = window.ScrollTrigger, R = this.R; g.registerPlugin(ST);
+    const rm = reduced();
+    if (window.Lenis && !rm) { this.lenis = new window.Lenis({ lerp: 0.1 }); this.lenis.on('scroll', ST.update); this.tick = t => this.lenis.raf(t * 1000); g.ticker.add(this.tick); g.ticker.lagSmoothing(0); }
+    this.setupButtons();
+    if (rm) { R.bigFill.current && (R.bigFill.current.style.clipPath = 'inset(0 0 0 0)'); return; }
+    this.ctx = g.context(() => {
+      g.utils.toArray('[data-words]').forEach(h => g.from(h.querySelectorAll('[data-w]'), { opacity: 0, filter: 'blur(12px)', yPercent: 25, duration: 1, stagger: 0.07, ease: 'power3.out', scrollTrigger: { trigger: h, start: 'top 86%', once: true } }));
+      g.utils.toArray('[data-stagger]').forEach(p => g.from(p.children, { opacity: 0, y: 30, duration: 0.8, stagger: 0.06, ease: 'power3.out', scrollTrigger: { trigger: p, start: 'top 86%', once: true } }));
+      g.utils.toArray('[data-room] img').forEach(img => g.fromTo(img, { scale: 1.12 }, { scale: 1, ease: 'none', scrollTrigger: { trigger: img.parentElement, start: 'top bottom', end: 'bottom top', scrub: true } }));
+      
+    });
+    window.addEventListener('load', () => ST.refresh()); setTimeout(() => ST.refresh(), 900);
+  }
+  setupButtons() {
+    if (!matchMedia('(hover: hover) and (pointer: fine)').matches || reduced()) return;
+    const g = window.gsap;
+    document.querySelectorAll('[data-btn]').forEach(b => {
+      if (b._mag) return; b._mag = 1;
+      const arrow = b.querySelector('[data-arrow]'), sheen = b.querySelector('[data-sheen]');
+      b.addEventListener('mousemove', e => { const r = b.getBoundingClientRect(); g.to(b, { x: (e.clientX - r.left - r.width / 2) * 0.2, y: (e.clientY - r.top - r.height / 2) * 0.3, duration: 0.4, ease: 'power3.out' }); });
+      b.addEventListener('mouseenter', () => { arrow && g.to(arrow, { x: 4, duration: 0.3, ease: 'power3.out' }); sheen && g.fromTo(sheen, { xPercent: -160 }, { xPercent: 260, duration: 0.8, ease: 'power2.out' }); });
+      b.addEventListener('mouseleave', () => { g.to(b, { x: 0, y: 0, duration: 0.6, ease: 'elastic.out(1,0.5)' }); arrow && g.to(arrow, { x: 0, duration: 0.3, ease: 'power3.out' }); });
+    });
+  }
+  goPage(href) {
+    const c = this.R.curtain.current, pine = this.R.curtainPine.current;
+    try { sessionStorage.setItem('gl_next', '1'); } catch (e) {}
+    if (!c || reduced()) { location.href = href; return; }
+    c.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 320, easing: EASE, fill: 'forwards' });
+    pine.animate([{ strokeDashoffset: 1 }, { strokeDashoffset: 0 }], { duration: 520, delay: 200, easing: IO_EASE, fill: 'forwards' }).onfinish = () => { location.href = href; };
+  }
+  animMenu(open) { const L = this.lenis; L && (open ? L.stop() : L.start()); return;
+    const m = this.R.menu.current; if (!m) return;
+    const links = m.querySelectorAll('[data-mlink]');
+    if (open) {
+      this.lenis && this.lenis.stop(); m.style.visibility = 'visible'; if (reduced()) return;
+      m.animate([{ clipPath: 'inset(0 0 100% 0)' }, { clipPath: 'inset(0 0 0% 0)' }], { duration: 560, easing: IO_EASE });
+      links.forEach((l, i) => l.animate([{ opacity: 0, transform: 'translateY(40px)' }, { opacity: 1, transform: 'none' }], { duration: 700, delay: 220 + i * 70, easing: EASE, fill: 'backwards' }));
+    } else {
+      this.lenis && this.lenis.start(); if (reduced()) { m.style.visibility = 'hidden'; return; }
+      m.animate([{ clipPath: 'inset(0 0 0% 0)' }, { clipPath: 'inset(0 0 100% 0)' }], { duration: 380, easing: IO_EASE }).onfinish = () => { if (!this.state.menuOpen) m.style.visibility = 'hidden'; };
+    }
+  }
+
+  renderVals() {
+    const s = this.state, t = T[s.lang], R = this.R, li = s.lang === 'sr' ? 0 : 1, L = s.lang;
+    const F = FLOORS[s.floor], FL = F[L];
+    const fl = { label: FL.label, title: FL.title, text: FL.text, rooms: FL.rooms.map(([n, d]) => ({ n, d })), big: P(F.photos[0]), bigAlt: ALTS[F.photos[0]][li], small: F.photos.slice(1).map(n => ({ src: P(n), alt: ALTS[n][li] })) };
+    const floorLabel = f => `${t.floorN} ${f}`;
+    const A = ROOMS[s.active];
+    const roomImgs = []; ROOMS.forEach((r, i) => r.imgs.forEach(n => roomImgs.push({ idx: i, src: P(n), alt: r[L][0] })));
+    const split = str => str.split(' ');
+    return {
+      t, isDesktop: s.isDesktop, isMobile: !s.isDesktop,
+      ...Object.fromEntries(Object.entries(R).map(([k, v]) => [k + 'Ref', v])),
+      toggleLang: () => this.setState(st => { const lang = st.lang === 'sr' ? 'en' : 'sr'; try { localStorage.setItem('gl_lang', lang); } catch (e) {} return { lang }; }),
+      openMenu: () => this.setState({ menuOpen: true }), closeMenu: () => this.setState({ menuOpen: false }), menuAria: s.menuOpen ? 'true' : 'false', menuVis: s.menuOpen ? 'visible' : 'hidden', menuClip: s.menuOpen ? 'inset(0 0 0% 0)' : 'inset(0 0 100% 0)', ...(() => { const rm = matchMedia('(prefers-reduced-motion: reduce)').matches, o = s.menuOpen; return { menuTr: rm ? 'none' : o ? 'clip-path 560ms cubic-bezier(0.77,0,0.175,1), visibility 0s' : 'clip-path 380ms cubic-bezier(0.77,0,0.175,1), visibility 0s 380ms', mlOp: o ? 1 : 0, mlTf: o ? 'none' : 'translateY(40px)', mlTr: rm ? 'none' : o ? 'opacity 700ms cubic-bezier(0.23,1,0.32,1), transform 700ms cubic-bezier(0.23,1,0.32,1)' : 'opacity 180ms ease-out, transform 180ms ease-out', mlD: Object.fromEntries([0, 1, 2, 3, 4, 5].map(k => ['d' + k, o && !rm ? (220 + k * 70) + 'ms' : '0ms'])) }; })(), 
+      heroWords: split(t.hero), liftWords: split(t.lift), roomsWords: split(t.rooms), rulesWords: split(t.rulesT), ftWords: split(t.ft),
+      floor: s.floor, dispArrow: s.floor === 2 ? '▲' : '▼', fl, showDoors: !reduced(),
+      floorBtns: [2, 1].map(n => ({ n, pressed: s.floor === n ? 'true' : 'false', label: `${t.floorBtn} ${n}`, bg: s.floor === n ? '#C9A45C' : 'transparent', fg: s.floor === n ? '#12241C' : '#C9A45C', on: e => this.goFloor(n, e.detail === 0) })),
+      liftKey: e => { if (e.key === '1' || e.key === '2') this.goFloor(+e.key, true); },
+      panelGrow: s.isDesktop ? 0 : 1, panelJustify: s.isDesktop ? 'center' : 'space-between', fbSize: s.isDesktop ? '64px' : '56px', stageMinH: s.isDesktop ? 'clamp(520px,58svh,680px)' : '0px', floorDir: s.isDesktop ? 'row' : 'column-reverse', fTxt: s.isDesktop ? '1 1 260px' : 'none', fImg: s.isDesktop ? '1.6 1 340px' : 'none', gridRows: s.isDesktop ? 'minmax(220px,1fr) clamp(90px,9vw,130px)' : 'clamp(200px,58vw,260px) clamp(64px,20vw,84px)', panelDir: s.isDesktop ? 'column' : 'row',
+      roomList: ROOMS.map((r, i) => ({ name: r[L][0], cur: i === s.active ? 'true' : 'false', fg: i === s.active ? '#F5F4EF' : '#18201C', bg: i === s.active ? '#12241C' : 'transparent', bd: i === s.active ? '#12241C' : '#C5CCC4', go: () => this.goRoom(i) })),
+      act: { floor: floorLabel(A.floor), name: A[L][0], text: A[L][1], tags: A[L][2] },
+      ...(() => { const pi = s.photo || 0, imgs = A.imgs, nx = ROOMS[(s.active + 1) % ROOMS.length]; const pre = pi + 1 < imgs.length ? P(imgs[pi + 1]) : P(nx.imgs[0]); const im = new Image(); im.src = pre; return {
+        photo: { src: P(imgs[pi]), alt: A[L][0] }, photoAR: s.isDesktop ? '3/2' : '4/3', photoRad: s.isDesktop ? '24px' : '20px', tabH: s.isDesktop ? '42px' : '40px', photoCounter: `${pi + 1} ${t.of} ${imgs.length}`,
+        thumbs: imgs.map((n, j) => ({ src: P(n), label: `${A[L][0]} ${j + 1}`, cur: j === pi ? 'true' : 'false', bd: j === pi ? '#C9A45C' : 'transparent', op: j === pi ? 1 : 0.65, on: () => this.setState({ photo: j }) })),
+        prevPhoto: () => this.stepPhoto(-1), nextPhoto: () => this.stepPhoto(1),
+        onTS: e => { this.tx = e.touches[0].clientX; }, onTE: e => { if (this.tx == null) return; const dx = e.changedTouches[0].clientX - this.tx; this.tx = null; if (Math.abs(dx) > 40) this.stepPhoto(dx < 0 ? 1 : -1); } }; })(),
+      roomBlocks: ROOMS.map(r => ({ floor: floorLabel(r.floor), name: r[L][0], text: r[L][1], imgs: r.imgs.map(n => ({ src: P(n), alt: r[L][0] })) })),
+      waHref: `https://wa.me/${WA}?text=${encodeURIComponent(L === 'sr' ? 'Zdravo, zanima me apartman Gačanović Lux.' : "Hello, I'm interested in Apartman Gačanović Lux.")}`,
+      mapsUrl: MAPS_URL, year: new Date().getFullYear(),
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Upit – Apartman Gačanović Lux, Zlatibor</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#12241C">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 140'%3E%3Crect width='100' height='140' rx='20' fill='%2312241C'/%3E%3Cpath d='M50 14L64 42H57L73 72H62L82 108H54V128H46V108H18L38 72H27L43 42H36Z' fill='none' stroke='%23C9A45C' stroke-width='5' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Italiana&amp;family=Inter+Tight:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="./site-shell.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+.lenis.lenis-stopped{overflow:hidden}
+body{margin:0;background:#F5F4EF;color:#18201C;font:400 17px/1.65 'Inter Tight',system-ui,sans-serif;-webkit-tap-highlight-color:transparent;-webkit-font-smoothing:antialiased;overflow-x:clip}
+button,a,input,select,textarea{touch-action:manipulation;font:inherit;color:inherit}
+img{display:block}
+a{color:inherit;text-decoration:none}
+@media (hover:hover) and (pointer:fine){a:hover{color:#A9764B}}
+:focus-visible{outline:2px solid #A9764B;outline-offset:3px}
+</style>
+</helmet>
+
+
+<div ref="{{ curtainRef }}" aria-hidden="true" style="position:fixed;inset:0;z-index:240;background:#12241C;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none">
+  <svg width="64" height="90" viewBox="0 0 100 140"><path ref="{{ curtainPineRef }}" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" d="M50 4L66 38H58L76 72H64L86 112H54V136H46V112H14L36 72H24L42 38H34Z" fill="none" stroke="#C9A45C" stroke-width="2.5" stroke-linejoin="round"></path></svg>
+</div>
+
+<header ref="{{ navRef }}" style="position:fixed;top:clamp(10px,1.6vw,20px);left:0;right:0;z-index:90;display:flex;justify-content:center;padding:0 clamp(10px,2vw,24px);pointer-events:none">
+  <div style="pointer-events:auto;width:100%;max-width:1240px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:8px 8px 8px 18px;border-radius:999px;background:rgba(18,36,28,0.6);backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%);border:1px solid rgba(201,164,92,0.3);color:#F5F4EF">
+    <a href="index.html" data-page="" style="display:flex;align-items:center;gap:10px;font-weight:500;font-size:17px;white-space:nowrap">
+      <svg width="18" height="25" viewBox="0 0 100 140" aria-hidden="true"><path d="M50 4L66 38H58L76 72H64L86 112H54V136H46V112H14L36 72H24L42 38H34Z" fill="none" stroke="#C9A45C" stroke-width="6" stroke-linejoin="round"></path></svg>
+      Gačanović Lux
+    </a>
+    <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+      <nav aria-label="Navigacija" style="display:flex;align-items:center;gap:30px;font-size:15px">
+        <a href="apartman.html" data-page="" style="color:#F5F4EF">{{ t.navApt }}</a>
+        <a href="zlatibor.html" data-page="" style="color:#F5F4EF">Zlatibor</a>
+        <a href="#kontakt" data-anchor="" style="color:#F5F4EF">{{ t.navContact }}</a>
+      </nav>
+    </sc-if>
+    <div style="display:flex;align-items:center;gap:6px">
+      <button type="button" onClick="{{ toggleLang }}" aria-label="{{ t.langLabel }}" style="height:44px;min-width:44px;padding:0 12px;border:0;border-radius:999px;background:transparent;color:#F5F4EF;font-weight:500;font-size:14px;cursor:pointer">{{ t.langOther }}</button>
+      <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+        <a href="rezervacija.html" data-page="" data-btn="" style="white-space:nowrap;position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:10px;height:44px;padding:0 20px;border-radius:999px;background:#C9A45C;color:#12241C;font-weight:600;font-size:15px;transition:transform 120ms cubic-bezier(0.23,1,0.32,1)" style-active="transform:scale(0.97)">
+          <span data-sheen="" aria-hidden="true" style="position:absolute;top:0;bottom:0;left:0;width:60%;background:linear-gradient(100deg,transparent,rgba(255,248,225,0.6),transparent);transform:translateX(-160%);pointer-events:none"></span>
+          <span style="position:relative">{{ t.ctaInq }}</span>
+          <span data-arrow="" aria-hidden="true" style="position:relative;display:inline-flex"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>
+        </a>
+      </sc-if>
+      <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+        <button type="button" onClick="{{ openMenu }}" aria-expanded="{{ menuAria }}" style="height:44px;padding:0 18px;border:0;border-radius:999px;background:#C9A45C;color:#12241C;font-weight:600;cursor:pointer" style-active="transform:scale(0.97)">{{ t.menu }}</button>
+      </sc-if>
+    </div>
+  </div>
+</header>
+
+<sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+  <div ref="{{ menuRef }}" role="dialog" aria-modal="true" aria-label="{{ t.menu }}" style="position:fixed;inset:0;z-index:120;background:#12241C;color:#F5F4EF;display:flex;flex-direction:column;padding:calc(20px + env(safe-area-inset-top)) 24px calc(32px + env(safe-area-inset-bottom));visibility:{{ menuVis }};clip-path:{{ menuClip }};transition:{{ menuTr }};overflow:hidden">
+    <svg aria-hidden="true" viewBox="0 0 100 140" style="position:absolute;right:-18%;bottom:-6%;width:90%;opacity:0.12"><path d="M50 4L66 38H58L76 72H64L86 112H54V136H46V112H14L36 72H24L42 38H34Z" fill="none" stroke="#C9A45C" stroke-width="0.8" stroke-linejoin="round"></path></svg>
+    <div style="position:relative;display:flex;justify-content:space-between;align-items:center;height:48px">
+      <span style="display:flex;align-items:center;gap:10px;font-weight:500"><svg width="18" height="25" viewBox="0 0 100 140" aria-hidden="true"><path d="M50 4L66 38H58L76 72H64L86 112H54V136H46V112H14L36 72H24L42 38H34Z" fill="none" stroke="#C9A45C" stroke-width="6" stroke-linejoin="round"></path></svg>Gačanović Lux</span>
+      <button type="button" onClick="{{ closeMenu }}" style="height:44px;padding:0 18px;border:1px solid rgba(201,164,92,0.4);border-radius:999px;background:transparent;color:#F5F4EF;cursor:pointer">{{ t.close }}</button>
+    </div>
+    <nav style="position:relative;margin-top:auto;display:flex;flex-direction:column;gap:2px">
+      <a data-mlink="" href="index.html" data-page="" onClick="{{ closeMenu }}" style="font-family:'Italiana',serif;font-size:clamp(48px,14vw,72px);line-height:1.08;opacity:{{ mlOp }};transform:{{ mlTf }};transition:{{ mlTr }};transition-delay:{{ mlD.d0 }}">{{ t.navHome }}</a>
+      <a data-mlink="" href="zlatibor.html" data-page="" onClick="{{ closeMenu }}" style="font-family:'Italiana',serif;font-size:clamp(48px,14vw,72px);line-height:1.08;opacity:{{ mlOp }};transform:{{ mlTf }};transition:{{ mlTr }};transition-delay:{{ mlD.d1 }}">Zlatibor</a>
+      <a data-mlink="" href="#kontakt" data-anchor="" onClick="{{ closeMenu }}" style="font-family:'Italiana',serif;font-size:clamp(48px,14vw,72px);line-height:1.08;opacity:{{ mlOp }};transform:{{ mlTf }};transition:{{ mlTr }};transition-delay:{{ mlD.d2 }}">{{ t.navContact }}</a>
+    </nav>
+    <a data-mlink="" href="rezervacija.html" data-page="" onClick="{{ closeMenu }}" style="position:relative;margin-top:40px;display:flex;align-items:center;justify-content:center;height:56px;border-radius:999px;background:#C9A45C;color:#12241C;font-weight:600;opacity:{{ mlOp }};transform:{{ mlTf }};transition:{{ mlTr }};transition-delay:{{ mlD.d3 }}">{{ t.ctaInq }}</a>
+  </div>
+</sc-if>
+
+
+<main id="top" style="background:#F5F4EF">
+  <section ref="{{ heroRef }}" style="max-width:1320px;margin:0 auto;padding:clamp(120px,13vw,170px) clamp(20px,4vw,40px) clamp(28px,3vw,40px);display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px">
+    <div style="display:flex;flex-direction:column;gap:18px">
+      <span data-hero-in="" style="align-self:flex-start;display:inline-flex;align-items:center;gap:8px;height:34px;padding:0 14px;border-radius:999px;border:1px solid #C5CCC4;font-size:14px;font-weight:500;white-space:nowrap">
+        <svg width="10" height="14" viewBox="0 0 100 140" aria-hidden="true"><path d="M50 4L66 38H58L76 72H64L86 112H54V136H46V112H14L36 72H24L42 38H34Z" fill="#A9764B"></path></svg>{{ t.badge }}
+      </span>
+      <h1 data-hero-words="" style="margin:0;font-family:'Italiana',serif;font-weight:400;font-size:clamp(64px,11vw,168px);line-height:0.9;color:#18201C">
+        <sc-for list="{{ heroWords }}" as="w" hint-placeholder-count="1"><span data-w="" style="display:inline-block">{{ w }}</span> </sc-for>
+      </h1>
+    </div>
+    <p data-hero-in="" style="margin:0;max-width:36ch;color:#3E4842">{{ t.heroSub }}</p>
+  </section>
+
+  <section style="max-width:1320px;margin:0 auto;padding:0 clamp(20px,4vw,40px) clamp(80px,10vw,140px)">
+    <ol aria-label="{{ t.stepsLabel }}" style="list-style:none;margin:0 0 clamp(20px,3vw,32px);padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px">
+      <sc-for list="{{ steps }}" as="st" hint-placeholder-count="3">
+        <li aria-current="{{ st.cur }}" style="display:flex;flex-direction:column;gap:10px;min-width:0">
+          <div style="height:4px;border-radius:2px;background:#DCE2DA;overflow:hidden"><div style="height:100%;background:#C9A45C;transform-origin:left center;transform:scaleX({{ st.fill }});transition:transform 500ms cubic-bezier(0.77,0,0.175,1)"></div></div>
+          <span style="display:flex;align-items:center;gap:10px;font-size:15px;color:{{ st.fg }};font-weight:{{ st.fw }}">
+            <span style="width:26px;height:26px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;background:{{ st.bg }};color:#12241C;flex:none">{{ st.n }}</span>
+            <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ st.label }}</span>
+          </span>
+        </li>
+      </sc-for>
+    </ol>
+
+    <div style="display:flex;flex-wrap:wrap;gap:clamp(16px,2vw,24px);align-items:flex-start">
+      <div style="flex:1.7 1 560px;min-width:0;background:#DCE2DA;border-radius:28px;padding:clamp(8px,1.4vw,16px)">
+        <div ref="{{ stepRef }}" style="background:#F5F4EF;border-radius:22px;padding:clamp(18px,3vw,36px)">
+
+          <sc-if value="{{ s1 }}" hint-placeholder-val="{{ true }}">
+            <div style="display:flex;flex-direction:column;gap:22px">
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+                <h2 style="margin:0;font-family:'Italiana',serif;font-weight:400;font-size:clamp(32px,3vw,44px);line-height:1">{{ t.s1Title }}</h2>
+                <div style="display:flex;gap:6px">
+                  <button type="button" onClick="{{ prevMonth }}" disabled="{{ prevOff }}" aria-label="{{ t.prevM }}" style="width:44px;height:44px;border-radius:50%;border:1px solid #18201C;background:transparent;color:#18201C;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:{{ prevOp }}"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2"></path></svg></button>
+                  <button type="button" onClick="{{ nextMonth }}" aria-label="{{ t.nextM }}" style="width:44px;height:44px;border-radius:50%;border:1px solid #18201C;background:transparent;color:#18201C;cursor:pointer;display:flex;align-items:center;justify-content:center"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2"></path></svg></button>
+                </div>
+              </div>
+              <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:clamp(20px,3vw,40px)">
+                <sc-for list="{{ months }}" as="m" hint-placeholder-count="2">
+                  <div style="display:flex;flex-direction:column;gap:10px">
+                    <span style="font-weight:600;font-size:17px">{{ m.label }}</span>
+                    <div aria-hidden="true" style="display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:2px;text-align:center;font-size:13px;color:#5C6660">
+                      <sc-for list="{{ wd }}" as="w"><span>{{ w }}</span></sc-for>
+                    </div>
+                    <div style="display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:2px">
+                      <sc-for list="{{ m.cells }}" as="d">
+                        <button type="button" onClick="{{ d.on }}" disabled="{{ d.dis }}" aria-label="{{ d.aria }}" aria-pressed="{{ d.pressed }}" style="height:44px;padding:0;border:1px solid {{ d.bd }};border-radius:12px;background:{{ d.bg }};color:{{ d.fg }};font-size:15px;font-weight:{{ d.fw }};text-decoration:{{ d.deco }};visibility:{{ d.vis }};cursor:{{ d.cur }};font-variant-numeric:tabular-nums">{{ d.label }}</button>
+                      </sc-for>
+                    </div>
+                  </div>
+                </sc-for>
+              </div>
+              <div style="display:flex;flex-wrap:wrap;gap:8px 22px;font-size:14px;color:#3E4842">
+                <span style="display:flex;align-items:center;gap:8px"><span style="width:16px;height:16px;border-radius:5px;background:#C9A45C"></span>{{ t.legSel }}</span>
+                <span style="display:flex;align-items:center;gap:8px"><span style="width:16px;height:16px;border-radius:5px;background:#DCE2DA"></span><span style="text-decoration:line-through">12</span> {{ t.legBooked }}</span>
+                <span>{{ t.minStay }}</span>
+              </div>
+              <sc-if value="{{ calErr }}" hint-placeholder-val="{{ false }}"><p role="alert" style="margin:0;color:#8E2B22">{{ calErr }}</p></sc-if>
+
+              <div style="border-top:1px solid #DCE2DA;padding-top:24px;display:flex;flex-wrap:wrap;gap:24px">
+                <div style="flex:1 1 240px;display:flex;flex-direction:column;gap:6px">
+                  <h3 style="margin:0 0 6px;font-family:'Italiana',serif;font-weight:400;font-size:30px;line-height:1">{{ t.whoTitle }}</h3>
+                  <sc-for list="{{ steppers }}" as="st" hint-placeholder-count="2">
+                    <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:8px 0;border-bottom:1px solid #DCE2DA">
+                      <span id="{{ st.id }}" style="font-size:18px;font-weight:500">{{ st.label }}</span>
+                      <div style="display:flex;align-items:center;gap:6px">
+                        <button type="button" onClick="{{ st.dec }}" disabled="{{ st.decOff }}" aria-label="{{ st.decLabel }}" style="width:44px;height:44px;border-radius:50%;border:1px solid #18201C;background:transparent;color:#18201C;font-size:20px;line-height:1;cursor:pointer;opacity:{{ st.decOp }}" style-active="transform:scale(0.94)">−</button>
+                        <div role="spinbutton" tabIndex="0" aria-labelledby="{{ st.id }}" aria-valuenow="{{ st.value }}" aria-valuemin="{{ st.min }}" aria-valuemax="{{ st.max }}" onKeyDown="{{ st.onKey }}" style="width:40px;text-align:center;font-size:22px;font-weight:500;font-variant-numeric:tabular-nums;line-height:44px;border-radius:8px">{{ st.value }}</div>
+                        <button type="button" onClick="{{ st.inc }}" disabled="{{ st.incOff }}" aria-label="{{ st.incLabel }}" style="width:44px;height:44px;border-radius:50%;border:0;background:#12241C;color:#C9A45C;font-size:20px;line-height:1;cursor:pointer;opacity:{{ st.incOp }}" style-active="transform:scale(0.94)">+</button>
+                      </div>
+                    </div>
+                  </sc-for>
+                  <p style="margin:0;font-size:14px;color:#3E4842;opacity:{{ maxOp }}" aria-hidden="{{ maxHidden }}">{{ t.maxNote }}</p>
+                </div>
+                <div style="flex:1.2 1 280px;display:flex;flex-direction:column;gap:4px">
+                  <sc-for list="{{ rooms }}" as="room" hint-placeholder-count="4">
+                    <div aria-label="{{ room.aria }}" style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid #DCE2DA">
+                      <span>{{ room.name }}</span>
+                      <span aria-hidden="true" style="display:flex;gap:8px">
+                        <sc-for list="{{ room.beds }}" as="bed">
+                          <span style="display:flex;gap:2px;padding:3px;border-radius:9px;border:1.5px solid #18201C">
+                            <sc-for list="{{ bed.slots }}" as="slot">
+                              <span style="position:relative;display:block;width:26px;height:20px;border-radius:6px;background:#DCE2DA;overflow:hidden">
+                                <span style="position:absolute;inset:0;border-radius:6px;background:linear-gradient(160deg,#C9A45C,#A9764B);opacity:{{ slot.op }};transform:scale({{ slot.sc }});transition:{{ slot.tr }}"></span>
+                              </span>
+                            </sc-for>
+                          </span>
+                        </sc-for>
+                      </span>
+                    </div>
+                  </sc-for>
+                  <p ref="{{ sentenceRef }}" aria-live="polite" style="margin:10px 0 0;font-size:17px">{{ sentence }}</p>
+                </div>
+              </div>
+
+              <div style="display:flex;justify-content:flex-end">
+                <button type="button" onClick="{{ toStep2 }}" disabled="{{ next1Off }}" style="display:inline-flex;align-items:center;gap:10px;height:56px;padding:0 28px;border:0;border-radius:999px;background:#12241C;color:#F5F4EF;font-weight:600;cursor:pointer;opacity:{{ next1Op }};transition:transform 120ms cubic-bezier(0.23,1,0.32,1)" style-active="transform:scale(0.97)">{{ t.next }}<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+              </div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ s2 }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;flex-direction:column;gap:22px">
+              <h2 style="margin:0;font-family:'Italiana',serif;font-weight:400;font-size:clamp(32px,3vw,44px);line-height:1">{{ t.s2Title }}</h2>
+              <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:18px 16px">
+                <label style="display:flex;flex-direction:column;gap:6px;font-weight:500">{{ t.fName }}
+                  <input type="text" name="name" autoComplete="name" value="{{ f.name }}" onChange="{{ onField }}" onBlur="{{ onBlur }}" aria-invalid="{{ inv.name }}" style="height:52px;padding:0 14px;border:1px solid {{ bd.name }};border-radius:14px;background:#FFFFFF;font-size:16px;font-weight:400;width:100%">
+                  <sc-if value="{{ err.name }}" hint-placeholder-val="{{ false }}"><span style="font-weight:400;color:#8E2B22;font-size:15px">{{ err.name }}</span></sc-if>
+                </label>
+                <label style="display:flex;flex-direction:column;gap:6px;font-weight:500">{{ t.fPhone }}
+                  <input type="tel" name="phone" autoComplete="tel" value="{{ f.phone }}" onChange="{{ onField }}" onBlur="{{ onBlur }}" aria-invalid="{{ inv.phone }}" style="height:52px;padding:0 14px;border:1px solid {{ bd.phone }};border-radius:14px;background:#FFFFFF;font-size:16px;font-weight:400;width:100%">
+                  <sc-if value="{{ err.phone }}" hint-placeholder-val="{{ false }}"><span style="font-weight:400;color:#8E2B22;font-size:15px">{{ err.phone }}</span></sc-if>
+                </label>
+                <label style="display:flex;flex-direction:column;gap:6px;font-weight:500">{{ t.fEmail }}
+                  <input type="email" name="email" autoComplete="email" value="{{ f.email }}" onChange="{{ onField }}" onBlur="{{ onBlur }}" aria-invalid="{{ inv.email }}" style="height:52px;padding:0 14px;border:1px solid {{ bd.email }};border-radius:14px;background:#FFFFFF;font-size:16px;font-weight:400;width:100%">
+                  <sc-if value="{{ err.email }}" hint-placeholder-val="{{ false }}"><span style="font-weight:400;color:#8E2B22;font-size:15px">{{ err.email }}</span></sc-if>
+                </label>
+                <label style="display:flex;flex-direction:column;gap:6px;font-weight:500">{{ t.fTime }}
+                  <select name="time" value="{{ f.time }}" onChange="{{ onField }}" style="height:52px;padding:0 12px;border:1px solid #C5CCC4;border-radius:14px;background:#FFFFFF;font-size:16px;font-weight:400;width:100%">
+                    <sc-for list="{{ timeOpts }}" as="o"><option value="{{ o.v }}">{{ o.l }}</option></sc-for>
+                  </select>
+                </label>
+                <label style="grid-column:1 / -1;display:flex;flex-direction:column;gap:6px;font-weight:500">{{ t.fMsg }}
+                  <textarea name="msg" rows="4" value="{{ f.msg }}" onChange="{{ onField }}" style="min-height:120px;padding:12px 14px;border:1px solid #C5CCC4;border-radius:14px;background:#FFFFFF;font-size:16px;font-weight:400;line-height:1.6;width:100%;resize:vertical"></textarea>
+                </label>
+              </div>
+              <p style="margin:0;font-size:14px;color:#3E4842">{{ t.required }}</p>
+              <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px">
+                <button type="button" onClick="{{ toStep1 }}" style="height:56px;padding:0 24px;border:1px solid #18201C;border-radius:999px;background:transparent;color:#18201C;font-weight:500;cursor:pointer" style-active="transform:scale(0.97)">{{ t.back }}</button>
+                <button type="button" onClick="{{ toStep3 }}" style="display:inline-flex;align-items:center;gap:10px;height:56px;padding:0 28px;border:0;border-radius:999px;background:#12241C;color:#F5F4EF;font-weight:600;cursor:pointer;transition:transform 120ms cubic-bezier(0.23,1,0.32,1)" style-active="transform:scale(0.97)">{{ t.next }}<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+              </div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ s3 }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;flex-direction:column;gap:22px">
+              <h2 style="margin:0;font-family:'Italiana',serif;font-weight:400;font-size:clamp(32px,3vw,44px);line-height:1">{{ t.s3Title }}</h2>
+              <dl style="margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));column-gap:32px">
+                <sc-for list="{{ review }}" as="r" hint-placeholder-count="6">
+                  <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:12px;padding:12px 0;border-bottom:1px solid #DCE2DA">
+                    <dt style="color:#3E4842">{{ r.k }}</dt>
+                    <dd style="margin:0;font-weight:500;overflow-wrap:anywhere">{{ r.v }}</dd>
+                  </div>
+                </sc-for>
+              </dl>
+              <sc-if value="{{ isError }}" hint-placeholder-val="{{ false }}"><p role="alert" style="margin:0;color:#8E2B22">{{ t.sendErr }}</p></sc-if>
+              <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px">
+                <button type="button" onClick="{{ toStep2 }}" style="height:56px;padding:0 24px;border:1px solid #18201C;border-radius:999px;background:transparent;color:#18201C;font-weight:500;cursor:pointer" style-active="transform:scale(0.97)">{{ t.back }}</button>
+                <button type="button" onClick="{{ send }}" disabled="{{ sending }}" data-btn="" style="white-space:nowrap;position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:12px;height:56px;padding:0 28px;border:0;border-radius:999px;background:#C9A45C;color:#12241C;font-weight:600;cursor:pointer;transition:transform 120ms cubic-bezier(0.23,1,0.32,1)" style-active="transform:scale(0.97)">
+                  <span data-sheen="" aria-hidden="true" style="position:absolute;top:0;bottom:0;left:0;width:60%;background:linear-gradient(100deg,transparent,rgba(255,248,225,0.6),transparent);transform:translateX(-160%);pointer-events:none"></span>
+                  <span style="position:relative">{{ sendLabel }}</span>
+                </button>
+              </div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ isSent }}" hint-placeholder-val="{{ false }}">
+            <div role="status" style="display:flex;flex-direction:column;align-items:flex-start;gap:22px;padding:clamp(8px,2vw,24px) 0">
+              <div aria-hidden="true" style="display:flex;align-items:flex-end;gap:12px">
+                <svg width="120" height="120" viewBox="0 0 120 120">
+                  <circle cx="60" cy="60" r="54" fill="none" stroke="#DCE2DA" stroke-width="2"></circle>
+                  <path ref="{{ checkRef }}" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" d="M38 62l15 15 30-34" fill="none" stroke="#A9764B" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+                <svg width="140" height="110" viewBox="0 0 140 110">
+                  <g ref="{{ glassLRef }}" style="transform-box:fill-box;transform-origin:50% 100%">
+                    <path d="M40 32h24l-1.6 16c-.8 5-4.4 8-9.4 8s-8.6-3-9.4-8z" fill="#C9A45C"></path>
+                    <path d="M38 14h28l-3 34c-1 7-6 11-11 11s-10-4-11-11zM52 59v30M40 92h24" fill="none" stroke="#12241C" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                  </g>
+                  <g ref="{{ glassRRef }}" style="transform-box:fill-box;transform-origin:50% 100%">
+                    <path d="M76 32h24l-1.6 16c-.8 5-4.4 8-9.4 8s-8.6-3-9.4-8z" fill="#C9A45C"></path>
+                    <path d="M74 14h28l-3 34c-1 7-6 11-11 11s-10-4-11-11zM88 59v30M76 92h24" fill="none" stroke="#12241C" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                  </g>
+                  <g ref="{{ sparkRef }}" style="opacity:0;transform-box:fill-box;transform-origin:50% 100%">
+                    <path d="M70 2v7M59 6l5 5M81 6l-5 5" fill="none" stroke="#A9764B" stroke-width="2.5" stroke-linecap="round"></path>
+                  </g>
+                </svg>
+              </div>
+              <h2 style="margin:0;font-family:'Italiana',serif;font-weight:400;font-size:clamp(48px,6vw,80px);line-height:0.95">{{ t.thanks }}</h2>
+              <p style="margin:0;font-size:19px;max-width:36ch">{{ t.thanksSub }}</p>
+              <a href="index.html" data-page="" style="display:inline-flex;align-items:center;height:52px;padding:0 22px;border-radius:999px;border:1px solid #18201C;font-weight:500">{{ t.backHome }}</a>
+            </div>
+          </sc-if>
+        </div>
+      </div>
+
+      <aside style="flex:1 1 300px;position:sticky;top:100px;background:#12241C;color:#F5F4EF;border-radius:28px;padding:clamp(22px,2.6vw,32px);border:1px solid rgba(201,164,92,0.35);display:flex;flex-direction:column;gap:18px">
+        <div style="display:flex;align-items:center;gap:12px">
+          <svg width="18" height="25" viewBox="0 0 100 140" aria-hidden="true"><path d="M50 4L66 38H58L76 72H64L86 112H54V136H46V112H14L36 72H24L42 38H34Z" fill="none" stroke="#C9A45C" stroke-width="6" stroke-linejoin="round"></path></svg>
+          <h2 style="margin:0;font-family:'Italiana',serif;font-weight:400;font-size:32px;line-height:1">{{ t.sumTitle }}</h2>
+        </div>
+        <dl ref="{{ sumRef }}" style="margin:0">
+          <sc-for list="{{ sumRows }}" as="r" hint-placeholder-count="5">
+            <div style="display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid rgba(201,164,92,0.2)">
+              <dt style="color:#DCE2DA">{{ r.k }}</dt>
+              <dd style="margin:0;text-align:right;font-variant-numeric:tabular-nums">{{ r.v }}</dd>
+            </div>
+          </sc-for>
+        </dl>
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
+          <span>{{ t.total }}</span>
+          <span style="font-family:'Italiana',serif;font-size:48px;line-height:1;color:#C9A45C;font-variant-numeric:tabular-nums">{{ totalTxt }}</span>
+        </div>
+        <p style="margin:0;font-size:14px;color:#AEB8B0">{{ t.priceNote }}</p>
+      </aside>
+    </div>
+
+    <a href="{{ waHref }}" target="_blank" rel="noopener" style="margin-top:clamp(16px,2vw,24px);display:flex;align-items:center;justify-content:center;gap:14px;min-height:76px;padding:12px 28px;border-radius:28px;background:#2E5E45;color:#F5F4EF;font-size:clamp(18px,1.6vw,21px);font-weight:600;text-align:center;transition:transform 120ms cubic-bezier(0.23,1,0.32,1)" style-hover="background:#264F3A;color:#F5F4EF" style-active="transform:scale(0.98)">
+      <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8a9.2 9.2 0 0 0-7.9 13.9L2.8 21.2l4.6-1.2A9.2 9.2 0 1 0 12 2.8Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"></path><path d="M8.6 7.6c.3-.4.7-.4 1-.3l.9 2c.1.3 0 .6-.2.8l-.5.6c.6 1.3 1.7 2.4 3.1 3.1l.6-.6c.2-.2.5-.3.8-.2l2 .9c.2.3.2.7-.2 1-.7.7-1.7 1-2.6.7-2.6-.8-4.6-2.8-5.4-5.4-.3-.9 0-1.9.5-2.6Z" fill="currentColor"></path></svg>
+      {{ t.waBig }}
+    </a>
+  </section>
+</main>
+
+
+<footer id="kontakt" ref="{{ footRef }}" style="background:#12241C;color:#F5F4EF;border-top:1px solid rgba(201,164,92,0.3);overflow:hidden;padding:clamp(72px,9vw,128px) clamp(20px,4vw,40px) 0">
+  <div style="max-width:1240px;margin:0 auto">
+    <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:32px;padding-bottom:clamp(48px,6vw,88px);border-bottom:1px solid rgba(201,164,92,0.3)">
+      <h2 data-words="" style="margin:0;font-family:'Italiana',serif;font-weight:400;font-size:clamp(52px,7.6vw,124px);line-height:0.95;max-width:11ch">
+        <sc-for list="{{ ftWords }}" as="w"><span data-w="" style="display:inline-block">{{ w }}</span> </sc-for>
+      </h2>
+      <a href="rezervacija.html" data-page="" data-btn="" style="white-space:nowrap;position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:12px;height:60px;padding:0 30px;border-radius:999px;background:#C9A45C;color:#12241C;font-weight:600;font-size:17px;transition:transform 120ms cubic-bezier(0.23,1,0.32,1)" style-active="transform:scale(0.97)">
+        <span data-sheen="" aria-hidden="true" style="position:absolute;top:0;bottom:0;left:0;width:60%;background:linear-gradient(100deg,transparent,rgba(255,248,225,0.6),transparent);transform:translateX(-160%);pointer-events:none"></span>
+        <span style="position:relative">{{ t.ctaInq }}</span>
+        <span data-arrow="" aria-hidden="true" style="position:relative;display:inline-flex"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>
+      </a>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:36px;padding:clamp(40px,5vw,64px) 0">
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <span style="display:flex;align-items:center;gap:10px;font-weight:500"><svg width="18" height="25" viewBox="0 0 100 140" aria-hidden="true"><path d="M50 4L66 38H58L76 72H64L86 112H54V136H46V112H14L36 72H24L42 38H34Z" fill="none" stroke="#C9A45C" stroke-width="6" stroke-linejoin="round"></path></svg>Gačanović Lux</span>
+        <p style="margin:0;color:#DCE2DA;max-width:28ch">{{ t.ftAbout }}</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <span style="color:#C9A45C;font-size:14px">{{ t.ftPages }}</span>
+        <a href="index.html" data-page="">{{ t.navHome }}</a>
+        <a href="zlatibor.html" data-page="">Zlatibor</a>
+        <a href="rezervacija.html" data-page="">{{ t.navInq }}</a>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <span style="color:#C9A45C;font-size:14px">{{ t.ftContact }}</span>
+        <a href="tel:+381666513388">066 651 3388</a>
+        <a href="{{ waHref }}" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="viber://chat?number=%2B381666513388">Viber</a>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <span style="color:#C9A45C;font-size:14px">{{ t.ftLoc }}</span>
+        <span>Svetogorska 16</span>
+        <span>31315 Zlatibor, Srbija</span>
+        <a href="{{ mapsUrl }}" target="_blank" rel="noopener" style="text-decoration:underline;text-underline-offset:3px">{{ t.ftMap }}</a>
+      </div>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-size:14px;color:#AEB8B0;padding-bottom:calc(32px + env(safe-area-inset-bottom))">
+      <span>© {{ year }} Gačanović Lux</span>
+      <span>{{ t.ftRating }}</span>
+    </div>
+  </div>
+  
+</footer>
+
+<sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+  <a href="{{ waHref }}" target="_blank" rel="noopener" aria-label="WhatsApp 066 651 3388" style="position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:80;width:60px;height:60px;border-radius:50%;background:#C9A45C;color:#12241C;display:flex;align-items:center;justify-content:center;box-shadow:0 14px 30px -10px rgba(0,0,0,0.5)" style-active="transform:scale(0.94)">
+    <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8a9.2 9.2 0 0 0-7.9 13.9L2.8 21.2l4.6-1.2A9.2 9.2 0 1 0 12 2.8Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"></path><path d="M8.6 7.6c.3-.4.7-.4 1-.3l.9 2c.1.3 0 .6-.2.8l-.5.6c.6 1.3 1.7 2.4 3.1 3.1l.6-.6c.2-.2.5-.3.8-.2l2 .9c.2.3.2.7-.2 1-.7.7-1.7 1-2.6.7-2.6-.8-4.6-2.8-5.4-5.4-.3-.9 0-1.9.5-2.6Z" fill="currentColor"></path></svg>
+  </a>
+</sc-if>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const WA = '381666513388';
+const PRICE_PER_NIGHT = 120; // € – okvirna cena po noći
+const WEB3FORMS_KEY = 'OVDE_KLJUC';
+const MAPS_URL = 'https://www.google.com/maps/search/?api=1&query=Apartman+Ga%C4%8Danovi%C4%87+Lux+Zlatibor';
+const MAX = 9;
+const ROOMS = [
+  { sr: 'Soba 1', en: 'Bedroom 1', beds: [2] },
+  { sr: 'Soba 2', en: 'Bedroom 2', beds: [2, 1] },
+  { sr: 'Soba 3', en: 'Bedroom 3', beds: [1, 1] },
+  { sr: 'Dnevna soba', en: 'Living room', beds: [1, 1] },
+];
+// PRIMER zauzetih dana (broj dana od danas) – zameniti stvarnim kalendarom.
+const BOOKED_OFFSETS = [[4, 6], [11, 12], [19, 22], [33, 35], [47, 49]];
+const MONTHS = {
+  sr: ['Januar', 'Februar', 'Mart', 'April', 'Maj', 'Jun', 'Jul', 'Avgust', 'Septembar', 'Oktobar', 'Novembar', 'Decembar'],
+  en: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+};
+const WD = { sr: ['P', 'U', 'S', 'Č', 'P', 'S', 'N'], en: ['M', 'T', 'W', 'T', 'F', 'S', 'S'] };
+
+const T = {
+  sr: {
+    navHome: 'Početna', navApt: 'Apartman', navFloors: 'Spratovi', navContact: 'Kontakt', navInq: 'Upit', menu: 'Meni', close: 'Zatvori', langOther: 'EN', langLabel: 'Switch to English', ctaInq: 'Pošaljite upit',
+    ft: 'Vidimo se pod zlatnim borom', ftAbout: 'Dupleks od 120 m² za porodice i veće društvo, u centru Zlatibora.', ftPages: 'Stranice', ftContact: 'Kontakt', ftLoc: 'Lokacija', ftMap: 'Otvorite mapu', ftRating: '9,6 na Booking-u · 5,0 na Google-u',
+    badge: 'Odgovaramo u toku dana', hero: 'Upit', heroSub: 'Izaberite datume i broj gostiju, ostavite kontakt – javljamo se sa potvrdom i tačnom cenom.',
+    stepsLabel: 'Koraci upita', st: ['Datumi', 'Podaci', 'Potvrda'],
+    s1Title: 'Kada dolazite?', prevM: 'Prethodni mesec', nextM: 'Sledeći mesec', legSel: 'Vaš boravak', legBooked: 'Zauzeto', minStay: 'Najmanje 2 noći.',
+    errMin: 'Najkraći boravak je 2 noći.', errBooked: 'Izabrani period obuhvata zauzete dane.', booked: 'zauzeto',
+    whoTitle: 'Ko dolazi?', adults: 'Odrasli', kids: 'Deca', less: 'Manje', more: 'Više', maxNote: 'Apartman prima najviše 9 osoba.',
+    next: 'Dalje', back: 'Nazad',
+    s2Title: 'Vaši podaci', fName: 'Ime i prezime*', fPhone: 'Telefon*', fEmail: 'Email', fTime: 'Vreme dolaska', fMsg: 'Napomena', required: 'Polja sa * su obavezna.',
+    times: [['', 'Izaberite'], ['14–16h', '14–16h'], ['16–18h', '16–18h'], ['18–20h', '18–20h'], ['20–22h', '20–22h'], ['Ne znam još', 'Ne znam još']],
+    errName: 'Upišite ime i prezime.', errPhone: 'Upišite broj telefona.', errEmail: 'Proverite email adresu.',
+    s3Title: 'Proverite upit', send: 'Pošaljite upit', sending: 'Šaljemo…',
+    sendErr: 'Upit nije poslat. Proverite internet vezu ili nam pišite na WhatsApp.',
+    thanks: 'Hvala!', thanksSub: 'Javljamo se uskoro – piće dobrodošlice vas čeka.', backHome: 'Nazad na početnu',
+    sumTitle: 'Vaš boravak', arr: 'Dolazak', dep: 'Odlazak', nightsL: 'Noći', guests: 'Gosti', perNight: 'Po noći', total: 'Ukupno',
+    priceNote: 'Okvirna cena. Tačan iznos potvrđujemo u odgovoru.',
+    waBig: 'Pošaljite upit na WhatsApp', name: 'Ime', phone: 'Telefon', email: 'Email', time: 'Vreme dolaska', msg: 'Napomena',
+  },
+  en: {
+    navHome: 'Home', navApt: 'Apartment', navFloors: 'Floors', navContact: 'Contact', navInq: 'Enquiry', menu: 'Menu', close: 'Close', langOther: 'SR', langLabel: 'Prebaci na srpski', ctaInq: 'Send an enquiry',
+    ft: 'See you under the golden pine', ftAbout: 'A 120 m² duplex for families and larger groups, in the centre of Zlatibor.', ftPages: 'Pages', ftContact: 'Contact', ftLoc: 'Location', ftMap: 'Open the map', ftRating: '9.6 on Booking.com · 5.0 on Google',
+    badge: 'We reply within the day', hero: 'Enquiry', heroSub: 'Pick your dates and number of guests, leave your contact – we’ll reply with confirmation and the exact price.',
+    stepsLabel: 'Enquiry steps', st: ['Dates', 'Details', 'Confirm'],
+    s1Title: 'When are you coming?', prevM: 'Previous month', nextM: 'Next month', legSel: 'Your stay', legBooked: 'Booked', minStay: 'Minimum 2 nights.',
+    errMin: 'The minimum stay is 2 nights.', errBooked: 'The selected period includes booked days.', booked: 'booked',
+    whoTitle: 'Who’s coming?', adults: 'Adults', kids: 'Children', less: 'Fewer', more: 'More', maxNote: 'The apartment sleeps up to 9 guests.',
+    next: 'Next', back: 'Back',
+    s2Title: 'Your details', fName: 'Full name*', fPhone: 'Phone*', fEmail: 'Email', fTime: 'Arrival time', fMsg: 'Note', required: 'Fields marked * are required.',
+    times: [['', 'Choose'], ['14–16h', '2–4 pm'], ['16–18h', '4–6 pm'], ['18–20h', '6–8 pm'], ['20–22h', '8–10 pm'], ['Ne znam još', 'Not sure yet']],
+    errName: 'Enter your full name.', errPhone: 'Enter a phone number.', errEmail: 'Check the email address.',
+    s3Title: 'Review your enquiry', send: 'Send enquiry', sending: 'Sending…',
+    sendErr: 'The enquiry wasn’t sent. Check your connection or message us on WhatsApp.',
+    thanks: 'Thank you!', thanksSub: 'We’ll be in touch soon – a welcome drink is waiting for you.', backHome: 'Back to home',
+    sumTitle: 'Your stay', arr: 'Arrival', dep: 'Departure', nightsL: 'Nights', guests: 'Guests', perNight: 'Per night', total: 'Total',
+    priceNote: 'Approximate price. We confirm the exact amount in our reply.',
+    waBig: 'Send the enquiry on WhatsApp', name: 'Name', phone: 'Phone', email: 'Email', time: 'Arrival time', msg: 'Note',
+  },
+};
+
+const pad = n => String(n).padStart(2, '0');
+const iso = d => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+const addD = (s, n) => { const d = new Date(s + 'T12:00:00'); d.setDate(d.getDate() + n); return iso(d); };
+const addM = (ym, k) => { const [y, m] = ym.split('-').map(Number); const d = new Date(y, m - 1 + k, 1); return `${d.getFullYear()}-${pad(d.getMonth() + 1)}`; };
+const nights = (a, b) => Math.round((new Date(b + 'T12:00:00') - new Date(a + 'T12:00:00')) / 864e5);
+const fmt = s => s ? s.split('-').reverse().join('.') + '.' : '';
+const srN = n => n === 1 ? 'osoba' : n <= 4 ? 'osobe' : 'osoba';
+const srAcc = n => n === 1 ? 'osobu' : n <= 4 ? 'osobe' : 'osoba';
+const srKid = n => n === 1 ? 'dete' : n <= 4 ? 'deteta' : 'dece';
+const TODAY = iso(new Date());
+const BOOKED = (() => { const s = new Set(); BOOKED_OFFSETS.forEach(([a, b]) => { for (let i = a; i <= b; i++) s.add(addD(TODAY, i)); }); return s; })();
+const EASE = 'cubic-bezier(0.23,1,0.32,1)', IO = 'cubic-bezier(0.77,0,0.175,1)';
+const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+class Component extends DCLogic {
+  state = (() => {
+    let lang = 'sr'; try { lang = localStorage.getItem('gl_lang') || 'sr'; } catch (e) {}
+    const q = new URLSearchParams(location.search);
+    let od = q.get('od') || '', dd = q.get('do') || '';
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(od) || od < TODAY) od = '';
+    if (!od || !/^\d{4}-\d{2}-\d{2}$/.test(dd) || nights(od, dd) < 2) dd = '';
+    let adults = parseInt(q.get('odrasli'), 10) || 0, kids = parseInt(q.get('deca'), 10) || 0;
+    const g = parseInt(q.get('gosti'), 10) || 0;
+    if (!adults) { adults = g || 2; kids = 0; }
+    adults = Math.max(1, Math.min(MAX, adults)); kids = Math.max(0, Math.min(MAX - adults, kids));
+    return { lang, isDesktop: true, menuOpen: false, step: 1, od, dd, adults, kids, view: (od || TODAY).slice(0, 7), calErr: '',
+      f: { name: '', phone: '', email: '', time: '', msg: '' }, touched: {}, tried2: false, status: 'idle' };
+  })();
+  R = ['curtain', 'curtainPine', 'nav', 'menu', 'hero', 'foot', 'step', 'sentence', 'sum', 'check', 'glassL', 'glassR', 'spark'].reduce((o, k) => (o[k] = React.createRef(), o), {});
+
+  componentDidMount() { const go = (n = 0) => window.GL ? window.GL.mount(this) : n < 200 && setTimeout(() => go(n + 1), 30); go(); }
+  componentWillUnmount() { window.GL && window.GL.unmount(this); }
+  componentDidUpdate(pp, ps) {
+    const s = this.state, R = this.R, rm = reduced();
+    if (window.GL) {
+      if (ps.menuOpen !== s.menuOpen) window.GL.menu(this, s.menuOpen);
+      if (ps.lang !== s.lang) { document.documentElement.lang = s.lang; window.GL.refresh(); }
+      window.GL.buttons();
+    }
+    if ((ps.step !== s.step || (ps.status !== 'sent' && s.status === 'sent')) && R.step.current) {
+      const dir = s.step >= ps.step ? 1 : -1;
+      if (!rm) R.step.current.animate([{ opacity: 0, transform: `translateX(${dir * 28}px)` }, { opacity: 1, transform: 'none' }], { duration: 380, easing: EASE });
+      const top = R.step.current.getBoundingClientRect().top;
+      if (top < 80) window.GL ? window.GL.scrollTo(this, top + scrollY - 120) : scrollTo(0, top + scrollY - 120);
+      window.GL && window.GL.refresh();
+    }
+    if (ps.adults + ps.kids !== s.adults + s.kids && R.sentence.current && !rm) R.sentence.current.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 180, easing: 'ease-out' });
+    if ((ps.od !== s.od || ps.dd !== s.dd || ps.adults + ps.kids !== s.adults + s.kids) && R.sum.current && !rm) R.sum.current.animate([{ opacity: 0.4 }, { opacity: 1 }], { duration: 220, easing: 'ease-out' });
+    if (ps.status !== 'sent' && s.status === 'sent') this.celebrate();
+  }
+  celebrate() {
+    const R = this.R, rm = reduced();
+    if (rm) { R.check.current && (R.check.current.style.strokeDashoffset = '0'); return; }
+    R.check.current && R.check.current.animate([{ strokeDashoffset: 1 }, { strokeDashoffset: 0 }], { duration: 700, delay: 200, easing: IO, fill: 'forwards' });
+    R.glassL.current && R.glassL.current.animate([{ transform: 'rotate(0deg)' }, { transform: 'rotate(7deg)', offset: 0.6 }, { transform: 'rotate(4deg)' }], { duration: 900, delay: 800, easing: EASE, fill: 'forwards' });
+    R.glassR.current && R.glassR.current.animate([{ transform: 'rotate(0deg)' }, { transform: 'rotate(-7deg)', offset: 0.6 }, { transform: 'rotate(-4deg)' }], { duration: 900, delay: 800, easing: EASE, fill: 'forwards' });
+    R.spark.current && R.spark.current.animate([{ opacity: 0, transform: 'scale(.6)' }, { opacity: 1, transform: 'scale(1)', offset: 0.35 }, { opacity: 0, transform: 'scale(1.15)' }], { duration: 800, delay: 1280, easing: 'ease-out', fill: 'forwards' });
+  }
+
+  pick(day) {
+    const { od, dd } = this.state, t = T[this.state.lang];
+    if (!od || dd) return this.setState({ od: day, dd: '', calErr: '' });
+    if (day <= od) return this.setState({ od: day, calErr: '' });
+    if (nights(od, day) < 2) return this.setState({ calErr: t.errMin });
+    for (let d = od; d < day; d = addD(d, 1)) if (BOOKED.has(d)) return this.setState({ calErr: t.errBooked });
+    this.setState({ dd: day, calErr: '' });
+  }
+  setCount = (key, v) => { const other = key === 'adults' ? this.state.kids : this.state.adults, min = key === 'adults' ? 1 : 0; this.setState({ [key]: Math.max(min, Math.min(MAX - other, v)) }); };
+  errors() {
+    const { f, lang } = this.state, t = T[lang], e = {};
+    if (!f.name.trim()) e.name = t.errName;
+    if (f.phone.replace(/\D/g, '').length < 6) e.phone = t.errPhone;
+    if (f.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email)) e.email = t.errEmail;
+    return e;
+  }
+  guestsTxt() {
+    const { adults, kids, lang } = this.state, n = adults + kids;
+    if (lang === 'sr') return `${n} ${srN(n)}${kids ? ` (${kids} ${srKid(kids)})` : ''}`;
+    return `${n} ${n === 1 ? 'guest' : 'guests'}${kids ? ` (${kids} ${kids === 1 ? 'child' : 'children'})` : ''}`;
+  }
+  fmtLong(s) {
+    if (!s) return '—';
+    try { return new Date(s + 'T12:00:00').toLocaleDateString(this.state.lang === 'sr' ? 'sr-Latn-RS' : 'en-GB', { day: 'numeric', month: 'short', year: 'numeric' }); } catch (e) { return fmt(s); }
+  }
+  waHref() {
+    const { od, dd, adults, kids, lang, f } = this.state, n = adults + kids, sr = lang === 'sr';
+    let m = sr ? 'Zdravo, zanima me apartman Gačanović Lux' : "Hello, I'm interested in Apartman Gačanović Lux";
+    if (od && dd) m += sr ? ` od ${fmt(od)} do ${fmt(dd)}` : ` from ${fmt(od)} to ${fmt(dd)}`;
+    else if (od) m += sr ? ` od ${fmt(od)}` : ` from ${fmt(od)}`;
+    m += sr ? `, za ${n} ${srAcc(n)}` : `, for ${n} ${n === 1 ? 'guest' : 'guests'}`;
+    if (kids) m += sr ? ` (od toga dece: ${kids})` : ` (${kids} ${kids === 1 ? 'child' : 'children'})`;
+    m += '.';
+    if (f.name.trim()) m += ` ${f.name.trim()}`;
+    return `https://wa.me/${WA}?text=${encodeURIComponent(m)}`;
+  }
+  send = async () => {
+    const s = this.state, n = s.adults + s.kids;
+    this.setState({ status: 'sending' });
+    try {
+      const r = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_KEY, subject: `Upit – ${fmt(s.od)}–${fmt(s.dd)} – ${n} ${srN(n)}`, from_name: 'Gačanović Lux sajt',
+          Dolazak: fmt(s.od), Odlazak: fmt(s.dd), Noci: nights(s.od, s.dd), Odrasli: s.adults, Deca: s.kids,
+          name: s.f.name, Telefon: s.f.phone, email: s.f.email, 'Vreme dolaska': s.f.time, Napomena: s.f.msg,
+          'Okvirno ukupno': `${nights(s.od, s.dd) * PRICE_PER_NIGHT} €`, Jezik: s.lang,
+        }),
+      });
+      const j = await r.json().catch(() => ({}));
+      this.setState({ status: r.ok && j.success !== false ? 'sent' : 'error' });
+    } catch (e) { this.setState({ status: 'error' }); }
+  };
+
+  renderVals() {
+    const s = this.state, t = T[s.lang], L = s.lang, sr = L === 'sr', total = s.adults + s.kids, split = x => x.split(' ');
+    const sent = s.status === 'sent';
+    const months = Array.from({ length: s.isDesktop ? 2 : 1 }, (_, k) => {
+      const ym = addM(s.view, k), [y, m] = ym.split('-').map(Number);
+      const lead = (new Date(y, m - 1, 1).getDay() + 6) % 7, dim = new Date(y, m, 0).getDate();
+      const blank = { label: '', vis: 'hidden', dis: true, bg: 'transparent', fg: 'inherit', bd: 'transparent', fw: 400, deco: 'none', cur: 'default', aria: '', pressed: 'false', on: null };
+      const cells = Array.from({ length: lead }, () => blank);
+      for (let day = 1; day <= dim; day++) {
+        const d = `${ym}-${pad(day)}`, past = d < TODAY, booked = BOOKED.has(d), edge = d === s.od || d === s.dd, inR = s.od && s.dd && d > s.od && d < s.dd;
+        cells.push({
+          label: day, vis: 'visible', dis: past || booked,
+          bg: edge ? '#C9A45C' : inR ? 'rgba(201,164,92,0.3)' : booked ? '#DCE2DA' : 'transparent',
+          fg: past ? '#A5ACA7' : booked ? '#6C746F' : '#18201C', bd: d === TODAY ? '#18201C' : 'transparent',
+          fw: edge ? 600 : 400, deco: booked ? 'line-through' : 'none', cur: past || booked ? 'default' : 'pointer',
+          aria: `${day}. ${MONTHS[L][m - 1]}${booked ? ', ' + t.booked : ''}`, pressed: edge ? 'true' : 'false', on: () => this.pick(d),
+        });
+      }
+      return { label: `${MONTHS[L][m - 1]} ${y}`, cells };
+    });
+    let k = 0;
+    const rooms = ROOMS.map(r => {
+      let filled = 0, cap = 0;
+      const beds = r.beds.map(p => ({ slots: Array.from({ length: p }, () => {
+        const on = k < total; k++; cap++; if (on) filled++;
+        return { op: on ? 1 : 0, sc: on ? 1 : 0.9, tr: on ? 'opacity 160ms ease-out, transform 460ms cubic-bezier(0.34,1.45,0.64,1)' : 'none' };
+      }) }));
+      return { name: r[L], beds, aria: `${r[L]}: ${filled}/${cap}` };
+    });
+    const sofa = Math.max(0, total - 7);
+    const sentence = sr
+      ? (sofa === 0 ? `${total} ${srN(total)} – svako ima svoj krevet ✓` : sofa === 1 ? `${total} ${srN(total)} – jedno spava na kauču u dnevnoj ✓` : `${total} ${srN(total)} – dvoje spava na kaučima u dnevnoj ✓`)
+      : (sofa === 0 ? `${total} ${total === 1 ? 'guest' : 'guests'} – everyone has a bed ✓` : sofa === 1 ? `${total} guests – one sleeps on a sofa bed ✓` : `${total} guests – two sleep on the sofa beds ✓`);
+    const mk = (key, label, min) => {
+      const v = s[key];
+      return { id: 'r-' + key, label, value: v, min, max: MAX - (key === 'adults' ? s.kids : s.adults),
+        dec: () => this.setCount(key, v - 1), inc: () => this.setCount(key, v + 1),
+        decOff: v <= min, incOff: total >= MAX, decOp: v <= min ? 0.3 : 1, incOp: total >= MAX ? 0.3 : 1,
+        decLabel: `${t.less}: ${label}`, incLabel: `${t.more}: ${label}`,
+        onKey: e => { if (e.key === 'ArrowUp' || e.key === 'ArrowRight') { e.preventDefault(); this.setCount(key, v + 1); } if (e.key === 'ArrowDown' || e.key === 'ArrowLeft') { e.preventDefault(); this.setCount(key, v - 1); } } };
+    };
+    const errs = this.errors(), err = {}, inv = {}, bd = {};
+    ['name', 'phone', 'email'].forEach(n => { const show = (s.touched[n] || s.tried2) && errs[n]; err[n] = show || ''; inv[n] = show ? 'true' : 'false'; bd[n] = show ? '#8E2B22' : '#C5CCC4'; });
+    const nn = s.od && s.dd ? nights(s.od, s.dd) : 0;
+    const timeLabel = (t.times.find(x => x[0] === s.f.time) || [])[1];
+    const review = [[t.arr, this.fmtLong(s.od)], [t.dep, this.fmtLong(s.dd)], [t.nightsL, nn], [t.guests, this.guestsTxt()], [t.name, s.f.name], [t.phone, s.f.phone], [t.email, s.f.email], [t.time, s.f.time ? timeLabel : ''], [t.msg, s.f.msg]]
+      .filter(([, v]) => v !== '' && v != null).map(([k2, v]) => ({ k: k2, v: String(v) }));
+    const stepNow = sent ? 4 : s.step;
+    return {
+      t, isDesktop: s.isDesktop, isMobile: !s.isDesktop,
+      ...Object.fromEntries(Object.entries(this.R).map(([k2, v]) => [k2 + 'Ref', v])),
+      toggleLang: () => this.setState(st => { const lang = st.lang === 'sr' ? 'en' : 'sr'; try { localStorage.setItem('gl_lang', lang); } catch (e) {} return { lang, calErr: '' }; }),
+      openMenu: () => this.setState({ menuOpen: true }), closeMenu: () => this.setState({ menuOpen: false }), menuAria: s.menuOpen ? 'true' : 'false', menuVis: s.menuOpen ? 'visible' : 'hidden', menuClip: s.menuOpen ? 'inset(0 0 0% 0)' : 'inset(0 0 100% 0)', ...(() => { const rm = matchMedia('(prefers-reduced-motion: reduce)').matches, o = s.menuOpen; return { menuTr: rm ? 'none' : o ? 'clip-path 560ms cubic-bezier(0.77,0,0.175,1), visibility 0s' : 'clip-path 380ms cubic-bezier(0.77,0,0.175,1), visibility 0s 380ms', mlOp: o ? 1 : 0, mlTf: o ? 'none' : 'translateY(40px)', mlTr: rm ? 'none' : o ? 'opacity 700ms cubic-bezier(0.23,1,0.32,1), transform 700ms cubic-bezier(0.23,1,0.32,1)' : 'opacity 180ms ease-out, transform 180ms ease-out', mlD: Object.fromEntries([0, 1, 2, 3, 4, 5].map(k => ['d' + k, o && !rm ? (220 + k * 70) + 'ms' : '0ms'])) }; })(), 
+      heroWords: split(t.hero), ftWords: split(t.ft),
+      steps: t.st.map((label, i) => { const n = i + 1; return { n, label, cur: stepNow === n ? 'step' : 'false', fill: stepNow > n ? 1 : stepNow === n ? 0.5 : 0, bg: stepNow >= n ? '#C9A45C' : '#DCE2DA', fg: stepNow === n ? '#18201C' : '#5C6660', fw: stepNow === n ? 600 : 400 }; }),
+      s1: !sent && s.step === 1, s2: !sent && s.step === 2, s3: !sent && s.step === 3, isSent: sent,
+      months, wd: WD[L], calErr: s.calErr,
+      prevOff: s.view <= TODAY.slice(0, 7), prevOp: s.view <= TODAY.slice(0, 7) ? 0.3 : 1,
+      prevMonth: () => this.setState(st => ({ view: st.view <= TODAY.slice(0, 7) ? st.view : addM(st.view, -1) })),
+      nextMonth: () => this.setState(st => ({ view: addM(st.view, 1) })),
+      steppers: [mk('adults', t.adults, 1), mk('kids', t.kids, 0)], maxOp: total >= MAX ? 1 : 0, maxHidden: total >= MAX ? 'false' : 'true',
+      rooms, sentence,
+      next1Off: !nn, next1Op: nn ? 1 : 0.35,
+      toStep1: () => this.setState({ step: 1 }),
+      toStep2: () => { if (s.od && s.dd) this.setState({ step: 2, status: s.status === 'error' ? 'idle' : s.status }); },
+      toStep3: () => { if (Object.keys(this.errors()).length) this.setState({ tried2: true }); else this.setState({ step: 3 }); },
+      f: s.f, err, inv, bd,
+      onField: e => { const { name, value } = e.target; this.setState(st => ({ f: { ...st.f, [name]: value } })); },
+      onBlur: e => { const n = e.target.name; this.setState(st => ({ touched: { ...st.touched, [n]: true } })); },
+      timeOpts: t.times.map(([v, l]) => ({ v, l })),
+      review, send: this.send, sending: s.status === 'sending', sendLabel: s.status === 'sending' ? t.sending : t.send, isError: s.status === 'error',
+      sumRows: [{ k: t.arr, v: this.fmtLong(s.od) }, { k: t.dep, v: this.fmtLong(s.dd) }, { k: t.nightsL, v: nn || '—' }, { k: t.guests, v: this.guestsTxt() }, { k: t.perNight, v: `~${PRICE_PER_NIGHT} €` }],
+      totalTxt: nn ? `~${nn * PRICE_PER_NIGHT} €` : '—',
+      waHref: this.waHref(), mapsUrl: MAPS_URL, year: new Date().getFullYear(),
+    };
+  }
+}
+</script>
+</body>
+</html>
